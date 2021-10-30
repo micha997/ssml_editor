@@ -12,7 +12,7 @@
       color="white"
       text-color="black"
       label="Submit"
-      @click="generateTTS()"/>
+      @click="googleTTS()"/>
     <div v-if="audioSrc" class="q-mt-md flex flex-center">
       <audio controls>
         <source :src="audioSrc" type="audio/mp3">
@@ -67,7 +67,33 @@ export default defineComponent({
         .then((response) => {
           this.audioSrc = 'https://developers.google.com/assistant/downloads/ssml/wavenet-speak.mp3?authuser=2';
         });
-    }
+    },
+    googleTTS(){
+      const requestBody = {
+        input: {
+          text: this.text
+        },
+        voice: {
+          languageCode: "en-US",
+          ssmlGender: "NEUTRAL"
+        },
+        audioConfig: {
+          audioEncoding: "MP3"
+        }
+      }
+
+      const requestConfig = {
+        headers: { 'Content-type': 'application/json; charset=UTF-8'}
+      }
+
+      this.$axios.post(
+        'http://localhost:4000/tts',
+        requestBody,
+        requestConfig)
+        .then((response) => {
+          this.audioSrc = "data:audio/mpeg;base64," + response.data;
+        });
+    },
   }
 })
 </script>
