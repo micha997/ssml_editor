@@ -1,6 +1,7 @@
 <template>
-  <q-page class="flex fit row wrap justify-center">
-    <div style="width: 300px" class="q-ma-xl">
+  <q-page class="fit row wrap justify-center">
+    <div style="width: 200px" class="q-mt-xl q-ml-xl">
+      <div class="text-h6">TTS Settings</div>
       <q-btn-toggle
       v-model="ssmlActive"
       spread
@@ -42,38 +43,120 @@
       <q-slider style="width: 100%;" v-model="pitch" :min="-20" :max="20" :step="0.1"/>
     </div>
 
+    <q-separator vertical inset class="q-mx-md"/>
+
     <div class="col-grow q-mt-xl">
-      <q-input
-      v-model="text"
-      outlined
-      label="SSML Text"
-      type="textarea"
-      />
-      <q-btn
-        class="q-mt-md"
-        color="white"
-        text-color="black"
-        label="Submit"
-        @click="generateTTS()"/>
+      <div class="text-h6">Text/SSML Input</div>
+      <div class="row q-gutter-x-sm">
+        <div class="col">
+          <q-input
+            v-model="text"
+            outlined
+            type="textarea"
+            />
+            <q-btn
+              class="q-mt-md"
+              color="white"
+              text-color="black"
+              label="Generate"
+              @click="generateTTS()"/>
+        </div>
+        <div class="col">
+          <div class="row wrap justify-center q-gutter-x-sm">
+            <div class="column inline wrap content-start q-gutter-y-sm">
+              <q-btn round color="primary" icon="pause" />
+              <q-btn round color="primary" icon="equalizer" />
+              <q-btn round color="primary" icon="rtt" />
+            </div>
+            <q-list bordered separator class="col-grow">
+              <q-item>
+                <q-item-section side>
+                  <q-icon color="primary" name="pause">
+                    <q-tooltip anchor="top middle" self="bottom middle" :offset="[10, 10]">
+                      Pause
+                    </q-tooltip>
+                  </q-icon>
+                </q-item-section>
+
+                <q-item-section>
+                  <q-slider
+                    :min="0"
+                    :max="10"
+                    label
+                    color="primary"
+                  />
+                </q-item-section>
+
+                <q-item-section side>
+                  <q-btn flat round color="grey-5" icon="cancel" />
+                </q-item-section>
+              </q-item>
+
+              <q-item>
+                <q-item-section side>
+                  <q-icon color="primary" name="equalizer">
+                    <q-tooltip anchor="top middle" self="bottom middle" :offset="[10, 10]">
+                      Emphasis
+                    </q-tooltip>
+                  </q-icon>
+                </q-item-section>
+
+                <q-item-section class="q-gutter-y-sm">
+                  <q-select filled dense label="Type" />
+                  <q-input outlined dense label="Text" />
+                </q-item-section>
+
+                <q-item-section side>
+                  <q-btn flat round color="grey-5" icon="cancel" />
+                </q-item-section>
+              </q-item>
+
+              <q-item>
+                <q-item-section side>
+                  <q-icon color="primary" name="rtt">
+                    <q-tooltip anchor="top middle" self="bottom middle" :offset="[10, 10]">
+                      Say as
+                    </q-tooltip>
+                  </q-icon>
+                </q-item-section>
+
+                <q-item-section class="q-gutter-y-sm">
+                  <q-select filled dense label="Type" />
+                  <q-input outlined dense label="Text" />
+                </q-item-section>
+
+                <q-item-section side>
+                  <q-btn flat round color="grey-5" icon="cancel" />
+                </q-item-section>
+              </q-item>
+            </q-list>
+          </div>
+        </div>
+      </div>
     </div>
 
-    <div style="width: 300px" class="q-ma-xl">
-      <div class="text-subtitle1">TTS MP3</div>
-      <div v-for="(item, index) in generatedTTS" :key="index" class="q-mt-md flex flex-center">
-        <audio controls>
-          <source :src="item" type="audio/mp3">
-          <p>Audio Element not supported</p>
-        </audio>
-        <!--
-        <q-btn
-          class="q-ml-md"
-          size="1.1rem"
-          round
-          unelevated
-          color="grey-3"
-          text-color="black"
-          icon="download"/>
-          -->
+    <q-separator vertical inset class="q-mx-md"/>
+
+    <div style="width: 400px" class="q-mt-xl q-mr-xl">
+      <div class="flex fit column">
+        <div class="text-h6">MP3 Output</div>
+        <q-scroll-area class="col-grow">
+        <div v-for="(item, index) in generatedTTS" :key="index" class="q-mb-md q-pr-md">
+          <q-card flat class="audio-card">
+            <q-card-section>
+              <div class="text-caption">
+                {{ item.text }}
+              </div>
+            </q-card-section>
+            <q-card-section>
+              <audio controls style="width: 100%">
+                <source :src="item.src" type="audio/mp3">
+                <p>Audio Element not supported</p>
+              </audio>
+            </q-card-section>
+          </q-card>
+        </div>
+      </q-scroll-area>
       </div>
     </div>
   </q-page>
@@ -146,7 +229,12 @@ export default defineComponent({
         requestBody,
         requestConfig)
         .then((response) => {
-          this.generatedTTS.push("data:audio/mpeg;base64," + response.data);
+          this.generatedTTS.push(
+            {
+              text: this.text,
+              src: "data:audio/mpeg;base64," + response.data
+            }
+          );
         });
     },
     buildRequestBody(){
@@ -177,6 +265,9 @@ export default defineComponent({
 </script>
 <style lang="scss" scoped>
   .my-custom-toggle {
+    border: 1px solid #eeeeee;
+  }
+  .audio-card {
     border: 1px solid #eeeeee;
   }
 </style>
