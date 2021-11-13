@@ -1,5 +1,6 @@
 
 const routes = [
+  /*
   {
     path: '/',
     component: () => import('layouts/MainLayout.vue'),
@@ -7,8 +8,9 @@ const routes = [
       { path: '', component: () => import('pages/Index.vue') }
     ]
   },
+  */
   {
-    path: '/editor',
+    path: '/',
     component: () => import('layouts/BlankLayout.vue'),
     children: [
       { path: '', component: () => import('pages/Editor.vue') }

@@ -46,7 +46,8 @@
     <q-separator vertical inset class="q-mx-md"/>
 
     <div class="col-grow q-mt-xl">
-      <div class="text-h6">Text/SSML Input</div>
+      <div v-if="ssmlActive" class="text-h6">SSML Input</div>
+      <div v-else class="text-h6">Text Input</div>
       <div class="row q-gutter-x-sm">
         <div class="col">
           <q-input
