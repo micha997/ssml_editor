@@ -51,10 +51,44 @@
       <div class="row q-gutter-x-sm">
         <div class="col">
           <q-input
-            v-model="text"
+            v-model="editor"
             outlined
             type="textarea"
             />
+            <q-editor
+              ref="editorRef"
+              class="q-mt-md"
+              v-model="editor"
+              :definitions="definitions"
+              :toolbar="toolbar"
+              toolbar-rounded
+              min-height="20rem">
+              <template v-slot:break>
+                <q-btn-dropdown
+                  unelevated
+                  dense
+                  rounded
+                  menu-anchor="top right"
+                  menu-self="top left"
+                  color="white"
+                  text-color="primary"
+                  dropdown-icon="pause"
+                  size="md"
+                >
+                  <q-list>
+                    <q-item clickable @click="addBreak(250)">
+                      <q-item-section>200ms</q-item-section>
+                    </q-item>
+                    <q-item clickable @click="addBreak(500)">
+                      <q-item-section>400ms</q-item-section>
+                    </q-item>
+                    <q-item clickable @click="addBreak(1000)">
+                      <q-item-section>1000ms</q-item-section>
+                    </q-item>
+                  </q-list>
+                </q-btn-dropdown>
+              </template>
+            </q-editor>
             <q-btn
               class="q-mt-md"
               color="white"
@@ -62,6 +96,7 @@
               label="Generate"
               @click="generateTTS()"/>
         </div>
+        <!--
         <div class="col">
           <div class="row wrap justify-center q-gutter-x-sm">
             <div class="column inline wrap content-start q-gutter-y-sm">
@@ -133,8 +168,10 @@
             </q-list>
           </div>
         </div>
+        -->
       </div>
     </div>
+
 
     <q-separator vertical inset class="q-mx-md"/>
 
@@ -164,24 +201,27 @@
 </template>
 
 <script>
-import { defineComponent } from 'vue';
-
 const TTS_URL = 'http://localhost:4000/tts';
 
-export default defineComponent({
+export default {
   name: 'PageEditor',
   data() {
     return {
       generatedTTS: [],
 
-      text: '',
-      ssmlActive: false,
+      ssmlActive: true,
       pitch: 0,
       speakingRate: 1,
       languageSelection: null,
-      languageSelected: 'de-DE',
+      languageSelected: 'en-US',
       voiceSelection: null,
-      voiceSelected: ''
+      voiceSelected: 'en-US-Wavenet-F',
+
+      editor: 'Hello There',
+      definitions: {},
+      toolbar: [
+        ['break']
+      ]
     }
   },
   mounted(){
@@ -232,20 +272,25 @@ export default defineComponent({
         .then((response) => {
           this.generatedTTS.push(
             {
-              text: this.text,
+              text: this.editor.replace(/<\/?[^>]+(>|$)/g, ""),
               src: "data:audio/mpeg;base64," + response.data
             }
           );
         });
     },
     buildRequestBody(){
-      let input;
+      let inputStart = "<speak>";
+      let inputEnd = "</speak>";
+      let input, ssmlInput;
 
       // Prepare input
       if(this.ssmlActive){
-        input = { ssml: this.text }
+        ssmlInput = inputStart.concat(this.editor);
+        ssmlInput = ssmlInput.concat(inputEnd);
+        ssmlInput = ssmlInput.replaceAll("&nbsp;", " ");
+        input = { ssml: ssmlInput }
       }else{
-        input = { text: this.text }
+        input = { text: this.editor.replace(/<\/?[^>]+(>|$)/g, "") }
       }
 
       return {
@@ -260,9 +305,16 @@ export default defineComponent({
           speakingRate: this.speakingRate
         }
       }
+    },
+    addBreak(amount){
+      const edit = this.$refs.editorRef;
+      edit.caret.restore();
+      edit.runCmd('insertHTML', ` <break time="` + amount + `ms"/> `);
+      edit.focus();
+      this.editor = this.editor.replaceAll("&nbsp;", " ");
     }
   }
-})
+}
 </script>
 <style lang="scss" scoped>
   .my-custom-toggle {
