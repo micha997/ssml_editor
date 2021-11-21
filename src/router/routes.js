@@ -13,7 +13,8 @@ const routes = [
     path: '/',
     component: () => import('layouts/BlankLayout.vue'),
     children: [
-      { path: '', component: () => import('pages/Editor.vue') }
+      { path: '', component: () => import('pages/Editor.vue') },
+      { path: 'new', component: () => import('pages/AdvancedEditor.vue') }
     ]
   },
 

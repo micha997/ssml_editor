@@ -1,0 +1,60 @@
+{
+    "title": "Story Title",
+    "tts-settings": {
+        "voice": {
+            "languageCode": "de-DE",
+            "name": "de-DE-Wavenet-F"
+        },
+        "audioConfig": {
+            "audioEncoding": "MP3",
+            "pitch": 0,
+            "speakingRate": 1
+        }
+    },
+    "slides": [
+        {
+            "title": "Slide Title",
+            "tts-settings": {
+                "voice": {
+                    "languageCode": "de-DE",
+                    "name": "de-DE-Wavenet-F"
+                },
+                "audioConfig": {
+                    "audioEncoding": "MP3",
+                    "pitch": 0,
+                    "speakingRate": 1
+                }
+            },
+            "layers": [
+                {
+                    "title": "Layer Title",
+                    "entries": [
+                        {
+                            "title": "Intro",
+                            "input": {
+                                "ssml": "<speak>Hallo</speak>"
+                            }
+                        },
+                        {
+                            "title": "Other",
+                            "tts-settings": {
+                                "voice": {
+                                    "languageCode": "de-DE",
+                                    "name": "de-DE-Wavenet-F"
+                                },
+                                "audioConfig": {
+                                    "audioEncoding": "MP3",
+                                    "pitch": 0,
+                                    "speakingRate": 1
+                                }
+                            },
+                            "input": {
+                                "text": "Hallo"
+                            }
+                        }
+                    ]
+                }
+            ]
+        }
+    ]
+}

@@ -72,6 +72,7 @@
                   menu-self="top left"
                   color="white"
                   text-color="primary"
+                  no-icon-animation
                   dropdown-icon="pause"
                   size="md"
                 >
@@ -84,6 +85,35 @@
                     </q-item>
                     <q-item clickable @click="addBreak(1000)">
                       <q-item-section>1000ms</q-item-section>
+                    </q-item>
+                  </q-list>
+                </q-btn-dropdown>
+              </template>
+              <template v-slot:language>
+                <q-btn-dropdown
+                  unelevated
+                  dense
+                  rounded
+                  menu-anchor="top right"
+                  menu-self="top left"
+                  color="white"
+                  text-color="primary"
+                  no-icon-animation
+                  dropdown-icon="translate"
+                  size="md"
+                >
+                  <q-list>
+                    <q-item clickable>
+                      <q-item-section>German</q-item-section>
+                    </q-item>
+                    <q-item clickable>
+                      <q-item-section>English</q-item-section>
+                    </q-item>
+                    <q-item clickable >
+                      <q-item-section>French</q-item-section>
+                    </q-item>
+                    <q-item clickable >
+                      <q-item-section>Russian</q-item-section>
                     </q-item>
                   </q-list>
                 </q-btn-dropdown>
@@ -220,7 +250,7 @@ export default {
       editor: 'Hello There',
       definitions: {},
       toolbar: [
-        ['break']
+        ['break', 'language']
       ]
     }
   },
