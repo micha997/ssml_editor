@@ -1,20 +1,17 @@
 
 const routes = [
-  /*
   {
     path: '/',
-    component: () => import('layouts/MainLayout.vue'),
+    component: () => import('layouts/StoryLayout.vue'),
     children: [
-      { path: '', component: () => import('pages/Index.vue') }
+      { path: '', component: () => import('pages/AdvancedEditor.vue') }
     ]
   },
-  */
   {
-    path: '/',
+    path: '/old',
     component: () => import('layouts/BlankLayout.vue'),
     children: [
       { path: '', component: () => import('pages/Editor.vue') },
-      { path: 'new', component: () => import('pages/AdvancedEditor.vue') }
     ]
   },
 
