@@ -9,7 +9,8 @@
           {{story.title}}
         </q-toolbar-title>
         <q-space ></q-space>
-        <q-btn-dropdown flat round dense no-icon-animation icon="source" class="q-mr-xs">
+        <q-btn flat round dense no-icon-animation icon="source" class="q-mr-xs">
+          <q-menu>
             <q-list>
                 <q-item clickable v-close-popup @click="storyUploadDialog = true">
                     <q-item-section side>
@@ -29,7 +30,8 @@
                     </q-item-section>
                 </q-item>
             </q-list>
-        </q-btn-dropdown>
+          </q-menu>
+        </q-btn>
         <q-btn flat round dense icon="settings" class="q-mr-xs" @click="storySettingsDialog = true"/>
         <q-btn flat dense round
           icon="volume_up" aria-label="Audio Menu"
@@ -116,8 +118,13 @@
             :expand-icon-class="(slide.layers.length > 0) ? '' : 'hidden'"
             :content-inset-level="0.5"
             :label="slide.title"
+            :header-class="{'bg-indigo-1': slide.active}"
+            @click="SetActiveProperty(slide)"
             default-closed>
-            <q-item v-for="(layer, j) in slide.layers" :key="j" clickable v-ripple>
+            <q-item
+              v-for="(layer, j) in slide.layers" :key="j"
+              :class="{'bg-indigo-1': layer.active}"
+              clickable v-ripple @click="SetActiveProperty(layer)">
                 <q-item-section>{{ layer.title }}</q-item-section>
             </q-item>
             </q-expansion-item>
@@ -128,7 +135,7 @@
         v-model="rightDrawerOpen"
         show-if-above
         side="right"
-        bordered width="400">
+        bordered :width="400">
         <q-card flat>
             <q-card-section>
                 <q-btn color="primary" text-color="white" label="Download All" class="full-width" />
@@ -171,15 +178,32 @@ export default defineComponent({
             leftDrawerOpen: false,
             rightDrawerOpen: false,
             storyUploadDialog: false,
-            storySettingsDialog: false
+            storySettingsDialog: false,
       }
   },
+  mounted() {},
   methods: {
       StoryUpload(){
           console.log(this.storyUploadPath);
       },
       StoryDownload(){
           console.log(this.story);
+      },
+      SetAllActivePropertyFalse(){
+        this.story.slides.forEach(slide => {
+          slide.active = false;
+
+          slide.layers.forEach(layer => {
+            layer.active = false;
+          });
+        });
+      },
+      RemoveActiveProperty(){
+
+      },
+      SetActiveProperty(element){
+        this.SetAllActivePropertyFalse();
+        element.active = true;
       }
   }
 })
