@@ -5,11 +5,14 @@
         <q-btn flat dense round
           icon="menu" aria-label="Menu"
           @click="leftDrawerOpen = !leftDrawerOpen"/>
-        <q-toolbar-title>
+        <q-toolbar-title class="cursor-pointer">
           {{story.title}}
+          <q-popup-edit v-model="story.title" auto-save v-slot="scope">
+            <q-input v-model="scope.value" dense autofocus counter @keyup.enter="scope.set" />
+          </q-popup-edit>
         </q-toolbar-title>
         <q-space ></q-space>
-        <q-btn flat round dense no-icon-animation icon="source" class="q-mr-xs">
+        <q-btn flat round dense icon="source" class="q-mr-xs">
           <q-menu>
             <q-list>
                 <q-item clickable v-close-popup @click="storyUploadDialog = true">
@@ -137,8 +140,9 @@
         side="right"
         bordered :width="400">
         <q-card flat>
-            <q-card-section>
-                <q-btn color="primary" text-color="white" label="Download All" class="full-width" />
+            <q-card-section class="q-gutter-y-md">
+                <q-btn outline color="primary" text-color="primary" label="Generate Files" class="full-width" />
+                <q-btn outline disable color="primary" text-color="primary" label="Download All" class="full-width" />
             </q-card-section>
         </q-card>
         <q-separator></q-separator>

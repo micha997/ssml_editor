@@ -29,9 +29,8 @@ const story = {
             entries: [
                 {
                     title: "Intro",
-                    input: {
-                        ssml: "<speak>Hallo</speak>"
-                    }
+                    ssml: true,
+                    input: "<speak>Hallo</speak>"
                 },
                 {
                     title: "Other",
@@ -46,9 +45,8 @@ const story = {
                             speakingRate: 1
                         }
                     },
-                    input: {
-                        text: "Hallo"
-                    }
+                    ssml: false,
+                    input: "Hallo"
                 }
             ],
             layers: [
@@ -58,9 +56,8 @@ const story = {
                     entries: [
                         {
                             title: "Intro",
-                            input: {
-                                ssml: "<speak>Hallo</speak>"
-                            }
+                            ssml: true,
+                            input: "<speak>Hallo</speak>"
                         },
                         {
                             title: "Other",
@@ -75,9 +72,8 @@ const story = {
                                     speakingRate: 1
                                 }
                             },
-                            input: {
-                                text: "Hallo"
-                            }
+                            ssml: false,
+                            input: "Hallo"
                         }
                     ]
                 }
@@ -100,9 +96,8 @@ const story = {
             entries: [
                 {
                     title: "Intro",
-                    input: {
-                        ssml: "<speak>Hallo</speak>"
-                    }
+                    ssml: true,
+                    input: "<speak>Hallo</speak>"
                 },
                 {
                     title: "Other",
@@ -117,9 +112,8 @@ const story = {
                             speakingRate: 1
                         }
                     },
-                    input: {
-                        text: "Hallo"
-                    }
+                    ssml: false,
+                    input: "Hallo"
                 }
             ],
             layers: [
@@ -129,9 +123,8 @@ const story = {
                     entries: [
                         {
                             title: "Intro",
-                            input: {
-                                ssml: "<speak>Hallo</speak>"
-                            }
+                            ssml: true,
+                            input: "<speak>Hallo</speak>"
                         },
                         {
                             title: "Other",
@@ -146,9 +139,8 @@ const story = {
                                     speakingRate: 1
                                 }
                             },
-                            input: {
-                                text: "Hallo"
-                            }
+                            ssml: false,
+                            input: "Hallo"
                         }
                     ]
                 }
@@ -171,9 +163,8 @@ const story = {
             entries: [
                 {
                     title: "Intro",
-                    input: {
-                        ssml: "<speak>Hallo</speak>"
-                    }
+                    ssml: true,
+                    input: "<speak>Hallo</speak>"
                 },
                 {
                     title: "Other",
@@ -188,9 +179,8 @@ const story = {
                             speakingRate: 1
                         }
                     },
-                    input: {
-                        text: "Hallo"
-                    }
+                    ssml: false,
+                    input: "Hallo"
                 }
             ],
             layers: []
