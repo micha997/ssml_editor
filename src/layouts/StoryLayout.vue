@@ -114,7 +114,7 @@
     <q-drawer
       v-model="leftDrawerOpen"
       show-if-above
-      bordered>
+      bordered :width="400">
         <q-list>
           <!--GROUP-->
           <q-expansion-item
@@ -276,26 +276,69 @@
         show-if-above
         side="right"
         bordered :width="400">
-        <q-card flat>
-            <q-card-section class="q-gutter-y-md">
-                <q-btn outline color="primary" text-color="primary" label="Generate Files" class="full-width" />
+        <q-scroll-area style="height: calc(100% - 120px); margin-bottom: 100px; border-right: 1px solid #ddd">
+          <q-list>
+            <!--GROUP-->
+            <q-expansion-item
+              v-for="(group, i) in story.groups" :key="i"
+              dense expand-icon-toggle switch-toggle-side expand-separator
+              :content-inset-level="0.5" 
+              default-opened>
+              <template v-slot:header>
+                <q-item-section>
+                  {{ group.title }}
+                </q-item-section>
+                <q-item-section side>
+                  <q-checkbox size="sm" />
+                </q-item-section>
+              </template>
+
+              <!--GROUP > SLIDE-->
+              <q-expansion-item
+                v-for="(slide, j) in group.slides" :key="j"
+                dense expand-icon-toggle switch-toggle-side
+                :content-inset-level="1"
+                default-opened>
+                <template v-slot:header>
+                  <q-item-section>
+                    {{ slide.title }}
+                  </q-item-section>
+                  <q-item-section side>
+                      <q-toggle size="xs" color="primary" left-label label="SSML" />
+                      <q-toggle size="xs" color="primary" left-label label="VTT" />
+                  </q-item-section>
+                  <q-item-section side>
+                    <q-checkbox size="sm" />
+                  </q-item-section>
+                </template>
+
+                <!--GROUP > SLIDE > LAYER-->
+                <q-item v-for="(layer, k) in slide.layers" :key="k">
+                    <q-item-section>
+                      {{ layer.title }}
+                    </q-item-section>
+                    <q-item-section side>
+                        <q-toggle size="xs" color="primary" left-label label="SSML" />
+                        <q-toggle size="xs" color="primary" left-label label="VTT" />
+                    </q-item-section>
+                    <q-item-section side>
+                      <q-checkbox size="sm" />
+                    </q-item-section>
+                </q-item>
+
+              </q-expansion-item>
+
+            </q-expansion-item>
+
+          </q-list>
+        </q-scroll-area>
+        <q-card flat class="absolute-bottom" style="height: 120px; border-top: 1px solid #ddd">
+            <q-card-section>
+                <q-btn outline color="primary" text-color="primary" label="Generate Files" class="full-width q-mb-md" />
                 <q-btn outline disable color="primary" text-color="primary" label="Download All" class="full-width" />
             </q-card-section>
         </q-card>
         <q-separator></q-separator>
-        <q-card v-for="n in 10" :key="n" flat class="audio-card">
-            <q-card-section>
-                <div class="text-caption">
-                MP3 {{n}}
-                </div>
-            </q-card-section>
-            <q-card-section>
-                <audio controls style="width: 100%">
-                <source type="audio/mp3">
-                <p>Audio Element not supported</p>
-                </audio>
-            </q-card-section>
-        </q-card>
     </q-drawer>
 
     <q-page-container>
