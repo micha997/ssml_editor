@@ -11,29 +11,13 @@ const story = {
             speakingRate: 1
         }
     },
-    slides: [
+    groups: [
         {
-            title: "Home Slide",
-            active: false,
-            tts_settings: {
-                voice: {
-                    languageCode: "de-DE",
-                    name: "de-DE-Wavenet-F"
-                },
-                audioConfig: {
-                    audioEncoding: "MP3",
-                    pitch: 0,
-                    speakingRate: 1
-                }
-            },
-            entries: [
+            title: "Gute wissenschaftliche Praxis",
+            slides: [
                 {
-                    title: "Intro",
-                    ssml: true,
-                    input: "<speak>Hallo</speak>"
-                },
-                {
-                    title: "Other",
+                    title: "Home Slide",
+                    active: false,
                     tts_settings: {
                         voice: {
                             languageCode: "de-DE",
@@ -45,14 +29,6 @@ const story = {
                             speakingRate: 1
                         }
                     },
-                    ssml: false,
-                    input: "Hallo"
-                }
-            ],
-            layers: [
-                {
-                    title: "Base Layer",
-                    active: false,
                     entries: [
                         {
                             title: "Intro",
@@ -75,32 +51,40 @@ const story = {
                             ssml: false,
                             input: "Hallo"
                         }
+                    ],
+                    layers: [
+                        {
+                            title: "Base Layer",
+                            active: false,
+                            entries: [
+                                {
+                                    title: "Intro",
+                                    ssml: true,
+                                    input: "<speak>Hallo</speak>"
+                                },
+                                {
+                                    title: "Other",
+                                    tts_settings: {
+                                        voice: {
+                                            languageCode: "de-DE",
+                                            name: "de-DE-Wavenet-F"
+                                        },
+                                        audioConfig: {
+                                            audioEncoding: "MP3",
+                                            pitch: 0,
+                                            speakingRate: 1
+                                        }
+                                    },
+                                    ssml: false,
+                                    input: "Hallo"
+                                }
+                            ]
+                        }
                     ]
-                }
-            ]
-        },
-        {
-            title: "Intro Slide",
-            active: false,
-            tts_settings: {
-                voice: {
-                    languageCode: "de-DE",
-                    name: "de-DE-Wavenet-F"
-                },
-                audioConfig: {
-                    audioEncoding: "MP3",
-                    pitch: 0,
-                    speakingRate: 1
-                }
-            },
-            entries: [
-                {
-                    title: "Intro",
-                    ssml: true,
-                    input: "<speak>Hallo</speak>"
                 },
                 {
-                    title: "Other",
+                    title: "Intro Slide",
+                    active: false,
                     tts_settings: {
                         voice: {
                             languageCode: "de-DE",
@@ -112,14 +96,6 @@ const story = {
                             speakingRate: 1
                         }
                     },
-                    ssml: false,
-                    input: "Hallo"
-                }
-            ],
-            layers: [
-                {
-                    title: "Base Layer",
-                    active: false,
                     entries: [
                         {
                             title: "Intro",
@@ -142,32 +118,40 @@ const story = {
                             ssml: false,
                             input: "Hallo"
                         }
+                    ],
+                    layers: [
+                        {
+                            title: "Base Layer",
+                            active: false,
+                            entries: [
+                                {
+                                    title: "Intro",
+                                    ssml: true,
+                                    input: "<speak>Hallo</speak>"
+                                },
+                                {
+                                    title: "Other",
+                                    tts_settings: {
+                                        voice: {
+                                            languageCode: "de-DE",
+                                            name: "de-DE-Wavenet-F"
+                                        },
+                                        audioConfig: {
+                                            audioEncoding: "MP3",
+                                            pitch: 0,
+                                            speakingRate: 1
+                                        }
+                                    },
+                                    ssml: false,
+                                    input: "Hallo"
+                                }
+                            ]
+                        }
                     ]
-                }
-            ]
-        },
-        {
-            title: "Explanation Slide",
-            active: false,
-            tts_settings: {
-                voice: {
-                    languageCode: "de-DE",
-                    name: "de-DE-Wavenet-F"
-                },
-                audioConfig: {
-                    audioEncoding: "MP3",
-                    pitch: 0,
-                    speakingRate: 1
-                }
-            },
-            entries: [
-                {
-                    title: "Intro",
-                    ssml: true,
-                    input: "<speak>Hallo</speak>"
                 },
                 {
-                    title: "Other",
+                    title: "Explanation Slide",
+                    active: false,
                     tts_settings: {
                         voice: {
                             languageCode: "de-DE",
@@ -179,11 +163,210 @@ const story = {
                             speakingRate: 1
                         }
                     },
-                    ssml: false,
-                    input: "Hallo"
+                    entries: [
+                        {
+                            title: "Intro",
+                            ssml: true,
+                            input: "<speak>Hallo</speak>"
+                        },
+                        {
+                            title: "Other",
+                            tts_settings: {
+                                voice: {
+                                    languageCode: "de-DE",
+                                    name: "de-DE-Wavenet-F"
+                                },
+                                audioConfig: {
+                                    audioEncoding: "MP3",
+                                    pitch: 0,
+                                    speakingRate: 1
+                                }
+                            },
+                            ssml: false,
+                            input: "Hallo"
+                        }
+                    ],
+                    layers: []
                 }
-            ],
-            layers: []
+            ]
+        },
+        {
+            title: "Recherche",
+            slides: [
+                {
+                    title: "Home Slide",
+                    active: false,
+                    tts_settings: {
+                        voice: {
+                            languageCode: "de-DE",
+                            name: "de-DE-Wavenet-F"
+                        },
+                        audioConfig: {
+                            audioEncoding: "MP3",
+                            pitch: 0,
+                            speakingRate: 1
+                        }
+                    },
+                    entries: [
+                        {
+                            title: "Intro",
+                            ssml: true,
+                            input: "<speak>Hallo</speak>"
+                        },
+                        {
+                            title: "Other",
+                            tts_settings: {
+                                voice: {
+                                    languageCode: "de-DE",
+                                    name: "de-DE-Wavenet-F"
+                                },
+                                audioConfig: {
+                                    audioEncoding: "MP3",
+                                    pitch: 0,
+                                    speakingRate: 1
+                                }
+                            },
+                            ssml: false,
+                            input: "Hallo"
+                        }
+                    ],
+                    layers: [
+                        {
+                            title: "Base Layer",
+                            active: false,
+                            entries: [
+                                {
+                                    title: "Intro",
+                                    ssml: true,
+                                    input: "<speak>Hallo</speak>"
+                                },
+                                {
+                                    title: "Other",
+                                    tts_settings: {
+                                        voice: {
+                                            languageCode: "de-DE",
+                                            name: "de-DE-Wavenet-F"
+                                        },
+                                        audioConfig: {
+                                            audioEncoding: "MP3",
+                                            pitch: 0,
+                                            speakingRate: 1
+                                        }
+                                    },
+                                    ssml: false,
+                                    input: "Hallo"
+                                }
+                            ]
+                        }
+                    ]
+                },
+                {
+                    title: "Intro Slide",
+                    active: false,
+                    tts_settings: {
+                        voice: {
+                            languageCode: "de-DE",
+                            name: "de-DE-Wavenet-F"
+                        },
+                        audioConfig: {
+                            audioEncoding: "MP3",
+                            pitch: 0,
+                            speakingRate: 1
+                        }
+                    },
+                    entries: [
+                        {
+                            title: "Intro",
+                            ssml: true,
+                            input: "<speak>Hallo</speak>"
+                        },
+                        {
+                            title: "Other",
+                            tts_settings: {
+                                voice: {
+                                    languageCode: "de-DE",
+                                    name: "de-DE-Wavenet-F"
+                                },
+                                audioConfig: {
+                                    audioEncoding: "MP3",
+                                    pitch: 0,
+                                    speakingRate: 1
+                                }
+                            },
+                            ssml: false,
+                            input: "Hallo"
+                        }
+                    ],
+                    layers: [
+                        {
+                            title: "Base Layer",
+                            active: false,
+                            entries: [
+                                {
+                                    title: "Intro",
+                                    ssml: true,
+                                    input: "<speak>Hallo</speak>"
+                                },
+                                {
+                                    title: "Other",
+                                    tts_settings: {
+                                        voice: {
+                                            languageCode: "de-DE",
+                                            name: "de-DE-Wavenet-F"
+                                        },
+                                        audioConfig: {
+                                            audioEncoding: "MP3",
+                                            pitch: 0,
+                                            speakingRate: 1
+                                        }
+                                    },
+                                    ssml: false,
+                                    input: "Hallo"
+                                }
+                            ]
+                        }
+                    ]
+                },
+                {
+                    title: "Explanation Slide",
+                    active: false,
+                    tts_settings: {
+                        voice: {
+                            languageCode: "de-DE",
+                            name: "de-DE-Wavenet-F"
+                        },
+                        audioConfig: {
+                            audioEncoding: "MP3",
+                            pitch: 0,
+                            speakingRate: 1
+                        }
+                    },
+                    entries: [
+                        {
+                            title: "Intro",
+                            ssml: true,
+                            input: "<speak>Hallo</speak>"
+                        },
+                        {
+                            title: "Other",
+                            tts_settings: {
+                                voice: {
+                                    languageCode: "de-DE",
+                                    name: "de-DE-Wavenet-F"
+                                },
+                                audioConfig: {
+                                    audioEncoding: "MP3",
+                                    pitch: 0,
+                                    speakingRate: 1
+                                }
+                            },
+                            ssml: false,
+                            input: "Hallo"
+                        }
+                    ],
+                    layers: []
+                }
+            ]
         }
     ]
 }

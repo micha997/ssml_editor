@@ -31,7 +31,7 @@ export default {
   },
   data() {
     return {
-      storyElement: story.slides[0],
+      storyElement: story.groups[0].slides[0],
       style: {
         display: 'flex',
         'align-items': 'stretch' 
