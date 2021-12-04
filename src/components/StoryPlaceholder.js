@@ -18,6 +18,7 @@ const story = {
                 {
                     title: "Home Slide",
                     active: false,
+                    export: true,
                     tts_settings: {
                         voice: {
                             languageCode: "de-DE",
@@ -56,6 +57,7 @@ const story = {
                         {
                             title: "Base Layer",
                             active: false,
+                            export: true,
                             entries: [
                                 {
                                     title: "Intro",
@@ -85,6 +87,7 @@ const story = {
                 {
                     title: "Intro Slide",
                     active: false,
+                    export: true,
                     tts_settings: {
                         voice: {
                             languageCode: "de-DE",
@@ -123,6 +126,7 @@ const story = {
                         {
                             title: "Base Layer",
                             active: false,
+                            export: true,
                             entries: [
                                 {
                                     title: "Intro",
@@ -152,6 +156,7 @@ const story = {
                 {
                     title: "Explanation Slide",
                     active: false,
+                    export: true,
                     tts_settings: {
                         voice: {
                             languageCode: "de-DE",
@@ -196,6 +201,7 @@ const story = {
                 {
                     title: "Home Slide",
                     active: false,
+                    export: true,
                     tts_settings: {
                         voice: {
                             languageCode: "de-DE",
@@ -234,6 +240,7 @@ const story = {
                         {
                             title: "Base Layer",
                             active: false,
+                            export: true,
                             entries: [
                                 {
                                     title: "Intro",
@@ -263,6 +270,7 @@ const story = {
                 {
                     title: "Intro Slide",
                     active: false,
+                    export: true,
                     tts_settings: {
                         voice: {
                             languageCode: "de-DE",
@@ -301,6 +309,7 @@ const story = {
                         {
                             title: "Base Layer",
                             active: false,
+                            export: true,
                             entries: [
                                 {
                                     title: "Intro",
@@ -330,6 +339,7 @@ const story = {
                 {
                     title: "Explanation Slide",
                     active: false,
+                    export: true,
                     tts_settings: {
                         voice: {
                             languageCode: "de-DE",

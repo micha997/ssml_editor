@@ -13,9 +13,10 @@
           </q-card-section>
         </q-card>
       </q-scroll-area>
-
+      <!--
       <q-scroll-area style="width: 300px;">
       </q-scroll-area>
+      -->
     </div>
   </q-page>
 </template>

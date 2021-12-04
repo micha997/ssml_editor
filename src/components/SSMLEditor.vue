@@ -16,24 +16,27 @@
                     </div>
                 </q-item-section>
                 <q-item-section side>
-                    <div class="text-grey-8 q-gutter-xs q-pr-sm">
-                        <q-toggle
-                            size="sm"
-                            v-model="ssml"
-                            label="SSML"
-                            left-label/>
-                        <q-btn class="gt-xs" size="12px" flat dense round icon="more_vert">
+                    <div class="row q-gutter-x-sm q-pr-md">
+                        <q-select
+                            v-if="tts_settings.languageCodes"
+                            filled dense style="width: 140px"
+                            v-model="tts_language_selection"
+                            :options="tts_settings.languageCodes"
+                            label="Language" />
+                        <q-select
+                            v-if="tts_settings.voiceNames"
+                            filled dense style="width: 200px"
+                            v-model="tts_voice_selection"
+                            :options="tts_settings.voiceNames"
+                            label="Voice" />
+                    </div>
+                </q-item-section>
+                <q-separator vertical/>
+                <q-item-section side>
+                    <div>
+                        <q-btn flat dense round size="md" icon="more_vert">
                             <q-menu>
                                 <q-list>
-                                    <q-item clickable v-close-popup>
-                                        <q-item-section side>
-                                            <q-icon name="edit"/>
-                                        </q-item-section>
-                                        <q-item-section>
-                                            <q-item-label>Edit</q-item-label>
-                                        </q-item-section>
-                                    </q-item>
-
                                     <q-item clickable v-close-popup>
                                         <q-item-section side>
                                             <q-icon name="delete"/>
@@ -45,12 +48,7 @@
                                 </q-list>
                             </q-menu>
                         </q-btn>
-                    </div>
-                </q-item-section>
-                <q-separator vertical/>
-                <q-item-section side>
-                    <div class="text-grey-8 q-gutter-xs">
-                        <q-btn class="gt-xs" size="12px" flat dense round icon="volume_up" />
+                        <q-btn flat dense round size="md" icon="volume_up" />
                     </div>
                 </q-item-section>
             </q-item>
@@ -69,14 +67,12 @@
                         min-height="8rem">
                         <template v-slot:break>
                             <q-btn-dropdown
-                                unelevated dense rounded
-                                menu-anchor="top right"
-                                menu-self="top left"
-                                color="white"
-                                text-color="primary"
+                                unelevated dense no-caps
+                                menu-anchor="top right" menu-self="top left"
+                                text-color="primary" size="sm"
                                 no-icon-animation
-                                dropdown-icon="pause"
-                                size="md">
+                                label="Break"
+                                dropdown-icon="pause">
                                 <q-list>
                                     <q-item clickable>
                                         <q-item-section>200ms</q-item-section>
@@ -91,55 +87,58 @@
                             </q-btn-dropdown>
                         </template>
                         <template v-slot:sayas>
-                            <q-btn
-                                unelevated dense rounded
-                                color="white"
-                                text-color="primary"
-                                icon="call_split"
-                                size="md"/>
+                            <q-btn-dropdown
+                                unelevated dense no-caps
+                                menu-anchor="top right" menu-self="top left"
+                                text-color="primary" size="sm"
+                                no-icon-animation
+                                label="Say As"
+                                dropdown-icon="call_split"/>
                         </template>
                         <template v-slot:sub>
-                            <q-btn
-                                unelevated dense rounded
-                                color="white"
-                                text-color="primary"
-                                icon="alt_route"
-                                size="md"/>
+                            <q-btn-dropdown
+                                unelevated dense no-caps
+                                menu-anchor="top right" menu-self="top left"
+                                text-color="primary" size="sm"
+                                no-icon-animation
+                                label="Substitute"
+                                dropdown-icon="alt_route"/>
                         </template>
                         <template v-slot:prosody>
-                            <q-btn
-                                unelevated dense rounded
-                                color="white"
-                                text-color="primary"
-                                icon="speed"
-                                size="md"/>
+                            <q-btn-dropdown
+                                unelevated dense no-caps
+                                menu-anchor="top right" menu-self="top left"
+                                text-color="primary" size="sm"
+                                no-icon-animation
+                                label="Prosody"
+                                dropdown-icon="speed"/>
                         </template>
                         <template v-slot:emphasis>
-                            <q-btn
-                                unelevated dense rounded
-                                color="white"
-                                text-color="primary"
-                                icon="highlight"
-                                size="md"/>
+                            <q-btn-dropdown
+                                unelevated dense no-caps
+                                menu-anchor="top right" menu-self="top left"
+                                text-color="primary" size="sm"
+                                no-icon-animation
+                                label="Emphasis"
+                                dropdown-icon="highlight"/>
                         </template>
                         <template v-slot:voice>
-                            <q-btn
-                                unelevated dense rounded
-                                color="white"
-                                text-color="primary"
-                                icon="record_voice_over"
-                                size="md"/>
+                            <q-btn-dropdown
+                                unelevated dense no-caps
+                                menu-anchor="top right" menu-self="top left"
+                                text-color="primary" size="sm"
+                                no-icon-animation
+                                label="Voice"
+                                dropdown-icon="record_voice_over"/>
                         </template>
                         <template v-slot:language>
                             <q-btn-dropdown
-                                unelevated dense rounded
-                                menu-anchor="top right"
-                                menu-self="top left"
-                                color="white"
-                                text-color="primary"
+                                unelevated dense no-caps
+                                menu-anchor="top right" menu-self="top left"
+                                text-color="primary" size="sm"
                                 no-icon-animation
-                                dropdown-icon="translate"
-                                size="md">
+                                label="Language"
+                                dropdown-icon="translate">
                                 <q-list>
                                 <q-item clickable>
                                     <q-item-section>German</q-item-section>
@@ -157,12 +156,13 @@
                             </q-btn-dropdown>
                         </template>
                         <template v-slot:phoneme>
-                            <q-btn
-                                unelevated dense rounded
-                                color="white"
-                                text-color="primary"
-                                icon="rtt"
-                                size="md"/>
+                            <q-btn-dropdown
+                                unelevated dense no-caps
+                                menu-anchor="top right" menu-self="top left"
+                                text-color="primary" size="sm"
+                                no-icon-animation
+                                label="Phoneme"
+                                dropdown-icon="rtt"/>
                         </template>
                     </q-editor>
                 </q-card-section>
@@ -173,6 +173,7 @@
 
 <script>
 import { defineComponent } from 'vue'
+import tts_settings from '../components/TTSSettingsPlaceholder.js'
 
 export default defineComponent({
   name: 'SSMLEditor',
@@ -186,9 +187,20 @@ export default defineComponent({
             title: this.entry.title,
             ssml: this.entry.ssml,
             input: this.entry.input,
+            tts_settings,
+            tts_language_selection: 'de-DE',
+            tts_voice_selection: 'de-DE-Wavenet-F',
             definitions: {},
             toolbar: [
-                ['break', 'sayas', 'sub', 'prosody', 'emphasis', 'voice', 'language', 'phoneme']
+                ['viewsource'],
+                ['break'],
+                ['sayas'],
+                ['sub'],
+                ['prosody'],
+                ['emphasis'],
+                ['voice'],
+                ['language'],
+                ['phoneme'],
             ],
             expanded: true
       }

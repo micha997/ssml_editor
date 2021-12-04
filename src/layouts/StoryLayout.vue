@@ -12,7 +12,9 @@
           </q-popup-edit>
         </q-toolbar-title>
         <q-space ></q-space>
-        <q-btn flat round dense icon="source" class="q-mr-xs">
+        <q-btn flat round dense class="q-mr-sm" icon="help"/>
+        <q-separator dark vertical/>
+        <q-btn flat round dense class="q-mx-sm" icon="source">
           <q-menu>
             <q-list>
                 <q-item clickable v-close-popup @click="storyUploadDialog = true">
@@ -35,8 +37,9 @@
             </q-list>
           </q-menu>
         </q-btn>
-        <q-btn flat round dense icon="settings" class="q-mr-xs" @click="storySettingsDialog = true"/>
-        <q-btn flat dense round
+        <q-btn flat round dense class="q-mr-sm" icon="settings" @click="storySettingsDialog = true"/>
+        <q-separator dark vertical/>
+        <q-btn flat dense round class="q-ml-sm"
           icon="volume_up" aria-label="Audio Menu"
           @click="rightDrawerOpen = !rightDrawerOpen"/>
       </q-toolbar>
@@ -64,12 +67,12 @@
             :options="tts_settings.languageCodes"
             label="Language" />
           <q-select
-            v-if="tts_settings.languageCodes"
+            v-if="tts_settings.voiceNames"
             class="q-mb-md"
             style="width: 100%;"
             filled
             v-model="story.tts_settings.voice.name"
-            :options="tts_settings.languageCodes"
+            :options="tts_settings.voiceNames"
             label="Voice" />
           <div class="text-caption" style="width: 400px;">
             Speed: {{story.tts_settings.audioConfig.speakingRate}}
@@ -121,6 +124,7 @@
             v-for="(group, i) in story.groups" :key="i"
             :group="story.title"
             expand-icon-toggle
+            :expand-icon-class="group.slides.length > 0 ? '' : 'hidden'"
             :content-inset-level="0.5"
             default-closed>
             <template v-slot:header>
@@ -174,6 +178,7 @@
               @click="SetActiveProperty(slide)"
               :content-inset-level="0.5"
               default-closed
+              :expand-icon-class="slide.layers.length > 0 ? '' : 'hidden'"
               :header-class="{'bg-indigo-1': slide.active}">
               <template v-slot:header>
                 <q-item-section avatar>
@@ -276,20 +281,18 @@
         show-if-above
         side="right"
         bordered :width="400">
-        <q-scroll-area style="height: calc(100% - 120px); margin-bottom: 100px; border-right: 1px solid #ddd">
+        <q-scroll-area style="height: calc(100% - 116px); margin-bottom: 100px; border-right: 1px solid #ddd">
           <q-list>
             <!--GROUP-->
             <q-expansion-item
               v-for="(group, i) in story.groups" :key="i"
               dense expand-icon-toggle switch-toggle-side expand-separator
+              :expand-icon-class="group.slides.length > 0 ? '' : 'invisible'"
               :content-inset-level="0.5" 
               default-opened>
               <template v-slot:header>
                 <q-item-section>
                   {{ group.title }}
-                </q-item-section>
-                <q-item-section side>
-                  <q-checkbox size="sm" />
                 </q-item-section>
               </template>
 
@@ -297,6 +300,7 @@
               <q-expansion-item
                 v-for="(slide, j) in group.slides" :key="j"
                 dense expand-icon-toggle switch-toggle-side
+                :expand-icon-class="slide.layers.length > 0 ? '' : 'invisible'"
                 :content-inset-level="1"
                 default-opened>
                 <template v-slot:header>
@@ -304,11 +308,7 @@
                     {{ slide.title }}
                   </q-item-section>
                   <q-item-section side>
-                      <q-toggle size="xs" color="primary" left-label label="SSML" />
-                      <q-toggle size="xs" color="primary" left-label label="VTT" />
-                  </q-item-section>
-                  <q-item-section side>
-                    <q-checkbox size="sm" />
+                    <q-checkbox size="sm" v-model="slide.export" />
                   </q-item-section>
                 </template>
 
@@ -318,11 +318,7 @@
                       {{ layer.title }}
                     </q-item-section>
                     <q-item-section side>
-                        <q-toggle size="xs" color="primary" left-label label="SSML" />
-                        <q-toggle size="xs" color="primary" left-label label="VTT" />
-                    </q-item-section>
-                    <q-item-section side>
-                      <q-checkbox size="sm" />
+                      <q-checkbox size="sm" v-model="layer.export" />
                     </q-item-section>
                 </q-item>
 
@@ -332,10 +328,10 @@
 
           </q-list>
         </q-scroll-area>
-        <q-card flat class="absolute-bottom" style="height: 120px; border-top: 1px solid #ddd">
+        <q-card flat class="absolute-bottom" style="height: 116px; border-top: 1px solid #ddd">
             <q-card-section>
-                <q-btn outline color="primary" text-color="primary" label="Generate Files" class="full-width q-mb-md" />
-                <q-btn outline disable color="primary" text-color="primary" label="Download All" class="full-width" />
+              <q-toggle v-model="exportVTT" left-label label="Export VTT" class="q-mb-sm"/>
+              <q-btn outline color="primary" text-color="primary" label="Export" class="full-width" />
             </q-card-section>
         </q-card>
         <q-separator></q-separator>
@@ -363,6 +359,8 @@ export default defineComponent({
             rightDrawerOpen: false,
             storyUploadDialog: false,
             storySettingsDialog: false,
+
+            exportVTT: false
       }
   },
   mounted() {},
