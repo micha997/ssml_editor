@@ -12,31 +12,11 @@
           </q-popup-edit>
         </q-toolbar-title>
         <q-space ></q-space>
-        <q-btn flat round dense class="q-mr-sm" icon="help"/>
+        <!--SSML Help Dialog-->
+        <SSMLHelpDialog/>
         <q-separator dark vertical/>
-        <q-btn flat round dense class="q-mx-sm" icon="source">
-          <q-menu>
-            <q-list>
-                <q-item clickable v-close-popup @click="storyUploadDialog = true">
-                    <q-item-section side>
-                        <q-icon name="file_upload"/>
-                    </q-item-section>
-                    <q-item-section>
-                        <q-item-label>Story Upload</q-item-label>
-                    </q-item-section>
-                </q-item>
+        <ImportExportDialog/>
 
-                <q-item clickable v-close-popup @click="StoryDownload()">
-                    <q-item-section side>
-                        <q-icon name="file_download"/>
-                    </q-item-section>
-                    <q-item-section>
-                        <q-item-label>Story Download</q-item-label>
-                    </q-item-section>
-                </q-item>
-            </q-list>
-          </q-menu>
-        </q-btn>
         <q-btn flat round dense class="q-mr-sm" icon="settings" @click="storySettingsDialog = true"/>
         <q-separator dark vertical/>
         <q-btn flat dense round class="q-ml-sm"
@@ -49,7 +29,7 @@
     <q-dialog v-model="storySettingsDialog">
       <q-card style="width: 600px" class="q-px-sm q-pb-md">
         <q-card-section>
-          <div class="text-h6">Story Settings</div>
+          <div class="text-h6">Project Settings</div>
         </q-card-section>
 
         <q-card-section>
@@ -89,28 +69,6 @@
             v-model="story.tts_settings.audioConfig.pitch"
             :min="-20" :max="20" :step="0.1"/>
         </q-card-section>
-      </q-card>
-    </q-dialog>
-
-    <!--Upload Dialog-->
-    <q-dialog v-model="storyUploadDialog">
-      <q-card style="width: 600px" class="q-px-sm q-pb-md">
-        <q-card-section>
-          <div class="text-h6">Story Upload</div>
-        </q-card-section>
-
-        <q-card-section class="q-pt-none">
-            <q-file outlined clearable v-model="storyUploadPath" accept=".json, application/json">
-                <template v-slot:prepend>
-                    <q-icon name="attach_file" />
-                </template>
-            </q-file>
-        </q-card-section>
-
-        <q-card-actions align="right" class="text-primary">
-          <q-btn flat label="Cancel" v-close-popup/>
-          <q-btn flat label="Upload" v-close-popup @click="StoryUpload()"/>
-        </q-card-actions>
       </q-card>
     </q-dialog>
 
@@ -345,32 +303,30 @@
 
 <script>
 import { defineComponent, ref } from 'vue'
+import SSMLHelpDialog from '../components/SSMLHelpDialog.vue'
+import ImportExportDialog from '../components/ImportExportDialog.vue'
 import story from '../components/StoryPlaceholder.js'
 import tts_settings from '../components/TTSSettingsPlaceholder.js'
 
 export default defineComponent({
   name: 'StoryLayout',
+  components: {
+    SSMLHelpDialog,
+    ImportExportDialog
+  },
   data() {
       return {
-            story: story,
-            storyUploadPath: null,
-            tts_settings,
-            leftDrawerOpen: false,
-            rightDrawerOpen: false,
-            storyUploadDialog: false,
-            storySettingsDialog: false,
+        story: story,
+        tts_settings,
+        leftDrawerOpen: false,
+        rightDrawerOpen: false,
+        storySettingsDialog: false,
 
-            exportVTT: false
+        exportVTT: false
       }
   },
   mounted() {},
   methods: {
-      StoryUpload(){
-          console.log(this.storyUploadPath);
-      },
-      StoryDownload(){
-          console.log(this.story);
-      },
       SetAllActivePropertyFalse(){
         this.story.groups.forEach(group => {
           group.slides.forEach(slide => {

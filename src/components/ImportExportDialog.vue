@@ -1,0 +1,70 @@
+<template>
+  <q-btn flat round dense class="q-mx-sm" icon="source">
+    <q-menu>
+      <q-list>
+        <q-item clickable v-close-popup @click="visible = true">
+          <q-item-section side>
+            <q-icon name="file_upload"/>
+          </q-item-section>
+          <q-item-section>
+            <q-item-label>Upload Project</q-item-label>
+          </q-item-section>
+        </q-item>
+
+        <q-item clickable v-close-popup @click="Download()">
+          <q-item-section side>
+            <q-icon name="file_download"/>
+          </q-item-section>
+          <q-item-section>
+            <q-item-label>Download Project</q-item-label>
+          </q-item-section>
+        </q-item>
+      </q-list>
+    </q-menu>
+  </q-btn>
+
+  <!--Upload Dialog-->
+  <q-dialog v-model="visible">
+    <q-card style="width: 600px" class="q-px-sm q-pb-md">
+      <q-card-section>
+        <div class="text-h6">Upload Project</div>
+      </q-card-section>
+
+      <q-card-section class="q-pt-none">
+          <q-file outlined clearable v-model="uploadPath" accept=".json, application/json">
+            <template v-slot:prepend>
+              <q-icon name="attach_file" />
+            </template>
+          </q-file>
+      </q-card-section>
+
+      <q-card-actions align="right" class="text-primary">
+        <q-btn flat label="Cancel" v-close-popup/>
+        <q-btn flat label="Upload" v-close-popup @click="Upload()"/>
+      </q-card-actions>
+    </q-card>
+  </q-dialog>
+</template>
+
+<script>
+import { defineComponent } from 'vue'
+
+export default defineComponent({
+  name: 'ImportExportDialog',
+  data(){
+    return{
+      visible: false,
+      uploadPath: null,
+    }
+  },
+  methods: {
+    Upload(){
+      console.log("Upload");
+      console.log(this.uploadPath);
+    },
+    Download(){
+      console.log("Download");
+    }
+  }
+})
+</script>
