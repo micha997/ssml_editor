@@ -32,7 +32,7 @@ export default {
   },
   data() {
     return {
-      storyElement: story.groups[0].slides[0],
+      storyElement: story.groups[0].slides[0].layers[0],
       style: {
         display: 'flex',
         'align-items': 'stretch' 

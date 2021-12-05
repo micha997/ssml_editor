@@ -259,7 +259,7 @@
                 v-for="(slide, j) in group.slides" :key="j"
                 dense expand-icon-toggle switch-toggle-side
                 :expand-icon-class="slide.layers.length > 0 ? '' : 'invisible'"
-                :content-inset-level="1"
+                :content-inset-level="1.5"
                 default-opened>
                 <template v-slot:header>
                   <q-item-section>
@@ -271,7 +271,7 @@
                 </template>
 
                 <!--GROUP > SLIDE > LAYER-->
-                <q-item v-for="(layer, k) in slide.layers" :key="k">
+                <q-item v-for="(layer, k) in slide.layers" :key="k" dense>
                     <q-item-section>
                       {{ layer.title }}
                     </q-item-section>

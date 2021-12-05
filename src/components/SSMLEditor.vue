@@ -59,7 +59,7 @@
                 <q-card-section class="q-pa-none">
                     <q-editor
                         ref="editorRef"
-                        flat
+                        flat style="line-height: 2rem;"
                         content-class="bg-indigo-1"
                         v-model="input"
                         :definitions="definitions"
