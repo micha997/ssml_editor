@@ -27,8 +27,8 @@
 
     <!--TTS Settings Dialog-->
     <q-dialog v-model="storySettingsDialog">
-      <q-card style="width: 600px" class="q-px-sm q-pb-md">
-        <q-card-section>
+      <q-card style="width: 600px">
+        <q-card-section class="bg-primary text-white">
           <div class="text-h6">Project Settings</div>
         </q-card-section>
 

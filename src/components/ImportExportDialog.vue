@@ -25,12 +25,12 @@
 
   <!--Upload Dialog-->
   <q-dialog v-model="visible">
-    <q-card style="width: 600px" class="q-px-sm q-pb-md">
-      <q-card-section>
+    <q-card style="width: 600px">
+      <q-card-section class="bg-primary text-white">
         <div class="text-h6">Upload Project</div>
       </q-card-section>
 
-      <q-card-section class="q-pt-none">
+      <q-card-section>
           <q-file outlined clearable v-model="uploadPath" accept=".json, application/json">
             <template v-slot:prepend>
               <q-icon name="attach_file" />
