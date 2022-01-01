@@ -3,16 +3,22 @@
 
   <!--SSML Help Dialog-->
   <q-dialog v-model="visible">
+
     <q-card style="width: 600px">
+
       <q-card-section class="bg-primary text-white">
         <div class="text-h6">SSML Guide</div>
       </q-card-section>
+
+      <q-scroll-area
+      :visible="visible"
+      style="height: 600px;">
 
       <!--Break-->
       <q-card-section>
         <q-item class="no-padding">
           <q-item-section avatar>
-            <q-btn round color="primary" icon="pause" />
+            <q-btn round color="primary" icon="pause" @click="break_visible = !break_visible"/>
           </q-item-section>
 
           <q-item-section>
@@ -21,6 +27,16 @@
           </q-item-section>
         </q-item>
       </q-card-section>
+
+      <q-slide-transition>
+        <div v-show="break_visible">
+            <q-card-section class="bg-grey-2">
+                <code>
+                  Step 1, take a deep breath. <break time="2000ms"/> Step 2, exhale.
+                </code>
+            </q-card-section>
+        </div>
+      </q-slide-transition>
 
       <q-separator inset/>
 
@@ -134,7 +150,10 @@
         </q-item>
       </q-card-section>
 
+      </q-scroll-area>
+
     </q-card>
+
   </q-dialog>
 </template>
 
@@ -145,7 +164,8 @@ export default defineComponent({
   name: 'SSMLHelpDialog',
   data(){
     return{
-      visible: false
+      visible: false,
+      break_visible: false
     }
   }
 })
