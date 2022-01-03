@@ -2,9 +2,9 @@
   <q-page>
     <q-resize-observer @resize="onResize"/>
     <div :style="style">
-      <q-scroll-area style="flex: 1;" class="q-pa-md">
+      <q-scroll-area v-if="element" style="flex: 1;" class="q-pa-md">
         <SSMLEditor
-          v-for="(entry, index) in storyElement.entries"
+          v-for="(entry, index) in element.entries"
           :key="index"
           :entry="entry"/>
         <q-card flat bordered>
@@ -22,6 +22,8 @@
 </template>
 
 <script>
+import { computed } from 'vue'
+import { useStore } from 'vuex'
 import SSMLEditor from '../components/SSMLEditor.vue'
 import story from '../components/StoryPlaceholder.js'
 
@@ -29,6 +31,17 @@ export default {
   name: 'AdvancedEditor',
   components: {
     SSMLEditor
+  },
+  setup() {
+    const store = useStore()
+
+    const element = computed({
+      get: () => store.getters['project/getActiveElement']
+    })
+
+    return {
+      element
+    }
   },
   data() {
     return {

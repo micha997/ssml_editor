@@ -3,7 +3,7 @@
         <!--GROUP-->
         <q-expansion-item
         v-for="(group, i) in groups" :key="i"
-        :group="story.title"
+        :group="store.state.title"
         expand-icon-toggle
         :expand-icon-class="group.slides.length > 0 ? '' : 'hidden'"
         :content-inset-level="0.5"
@@ -31,12 +31,12 @@
 
                 <q-separator/>
 
-                <q-item clickable v-close-popup @click="AddSlide(group)">
+                <q-item clickable v-close-popup @click="CreateSlide(i)">
                 <q-item-section side>
                     <q-icon name="add"/>
                 </q-item-section>
                 <q-item-section>
-                    <q-item-label>Add Slide</q-item-label>
+                    <q-item-label>Create Slide</q-item-label>
                 </q-item-section>
                 </q-item>
 
@@ -56,7 +56,7 @@
         <q-expansion-item
             v-for="(slide, j) in group.slides" :key="j"
             :group="group.title"
-            @click="SetActiveProperty(slide)"
+            @click="SetActiveSlide(i, j)"
             :content-inset-level="0.5"
             default-closed
             :expand-icon-class="slide.layers.length > 0 ? '' : 'hidden'"
@@ -84,12 +84,12 @@
 
                 <q-separator/>
 
-                <q-item clickable v-close-popup @click="AddLayer(slide)">
+                <q-item clickable v-close-popup @click="CreateLayer(i, j)">
                     <q-item-section side>
                         <q-icon name="add"/>
                     </q-item-section>
                     <q-item-section>
-                        <q-item-label>Add Layer</q-item-label>
+                        <q-item-label>Create Layer</q-item-label>
                     </q-item-section>
                 </q-item>
 
@@ -109,7 +109,7 @@
             <q-item
             v-for="(layer, k) in slide.layers" :key="k"
             :class="{'bg-indigo-1': layer.active}"
-            clickable v-ripple @click="SetActiveProperty(layer)">
+            clickable v-ripple @click="SetActiveLayer(i, j, k)">
                 <q-item-section avatar>
                 <q-icon size="sm" flat round name="layers" color="indigo-3"/>
                 </q-item-section>
@@ -150,8 +150,8 @@
 
         <q-separator/>
 
-        <q-item clickable v-ripple @click="AddGroup()">
-        <q-item-section>Create New Group</q-item-section>
+        <q-item clickable v-ripple @click="CreateGroup()">
+        <q-item-section>Create Group</q-item-section>
         </q-item>
     </q-list>
 </template>
@@ -159,74 +159,46 @@
 <script>
 import { defineComponent, computed } from 'vue'
 import { useStore } from 'vuex'
-import story from '../components/StoryPlaceholder.js'
 
 export default defineComponent({
   name: 'LeftDrawerContent',
   setup() {
-      const $store = useStore()
+      const store = useStore()
 
       const groups = computed({
-          get: () => $store.state.project.groups,
-          set: val => $store.commit('project/updateGroups', val)
+          get: () => store.state.project.groups,
+          set: val => store.commit('project/updateGroups', val)
       })
 
       return {
+          store,
           groups
       }
   },
-  data(){
-    return{
-        story
-    }
-  },
   methods: {
-    SetAllActivePropertyFalse(){
-        this.story.groups.forEach(group => {
-            group.slides.forEach(slide => {
-            slide.active = false;
-
-            slide.layers.forEach(layer => {
-                layer.active = false;
-            });
-            });
-        });
+    SetActiveSlide(group_index, slide_index){
+        this.store.dispatch('project/SetActiveSlide', {group_index, slide_index});
     },
-    SetActiveProperty(element){
-        this.SetAllActivePropertyFalse();
-        element.active = true;
+    SetActiveLayer(group_index, slide_index, layer_index){
+        this.store.dispatch('project/SetActiveLayer', {group_index, slide_index, layer_index});
     },
-    AddGroup(){
-        this.story.groups.push(
-            {
-            title: 'Enter new group name',
-            slides: []
-            }
-        )
+    CreateGroup(){
+        this.store.commit('project/createGroup');
     },
     DeleteGroup(group_index){
-        this.story.groups.splice(group_index, 1);
+        this.store.commit('project/deleteGroup', group_index);
     },
-    AddSlide(group){
-        group.slides.push(
-            {
-            title: 'Enter new slide name',
-            layers: []
-            }
-        )
+    CreateSlide(group_index){
+        this.store.commit('project/createSlide', group_index);
     },
     DeleteSlide(group_index, slide_index){
-        this.story.groups[group_index].slides.splice(slide_index, 1);
+        this.store.commit('project/deleteSlide', {group_index, slide_index});
     },
-    AddLayer(slide){
-        slide.layers.push(
-            {
-            title: 'Enter new layer name'
-            }
-        )
+    CreateLayer(group_index, slide_index){
+        this.store.commit('project/createLayer', {group_index, slide_index});
     },
     DeleteLayer(group_index, slide_index, layer_index){
-        this.story.groups[group_index].slides[slide_index].layers.splice(layer_index, 1);
+        this.store.commit('project/deleteLayer', {group_index, slide_index, layer_index});
     }
   }
 })
