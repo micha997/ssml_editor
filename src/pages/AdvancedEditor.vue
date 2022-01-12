@@ -2,14 +2,14 @@
   <q-page>
     <q-resize-observer @resize="onResize"/>
     <div :style="style">
-      <q-scroll-area v-if="element" style="flex: 1;" class="q-pa-md">
+      <q-scroll-area v-if="storeElement.entries" style="flex: 1;" class="q-pa-md">
         <SSMLEditor
-          v-for="(entry, index) in element.entries"
-          :key="index"
+          v-for="entry in storeElement.entries"
+          :key="entry.uid"
           :entry="entry"/>
         <q-card flat bordered>
           <q-card-section class="flex row justify-center items-center">
-            <q-btn outline dense round color="grey-5" icon="add" @click="addNewEntry()" />
+            <q-btn outline dense round color="grey-5" icon="add" @click="createEntry()" />
           </q-card-section>
         </q-card>
       </q-scroll-area>
@@ -25,7 +25,6 @@
 import { computed } from 'vue'
 import { useStore } from 'vuex'
 import SSMLEditor from '../components/SSMLEditor.vue'
-import story from '../components/StoryPlaceholder.js'
 
 export default {
   name: 'AdvancedEditor',
@@ -35,17 +34,25 @@ export default {
   setup() {
     const store = useStore()
 
-    const element = computed({
+    const storeElement = computed({
       get: () => store.getters['project/getActiveElement']
     })
 
     return {
-      element
+      store,
+      storeElement,
     }
+  },
+  watch: {
+    /*
+    storeElement (newElement) {
+      this.title = newElement.title;
+      this.entries = [... newElement.entries];
+    }
+    */
   },
   data() {
     return {
-      storyElement: story.groups[0].slides[0].layers[0],
       style: {
         display: 'flex',
         'align-items': 'stretch' 
@@ -53,14 +60,8 @@ export default {
     }
   },
   methods: {
-    addNewEntry(){
-      this.storyElement.entries.push(
-        {
-          title: 'Enter Title',
-          ssml: true,
-          input: 'Enter Text'
-        }
-      )
+    createEntry(){
+      this.store.commit('project/createEntry');
     },
     onResize (size) {
       this.style.height = size.height + 'px'

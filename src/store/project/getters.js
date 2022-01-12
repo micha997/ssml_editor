@@ -1,11 +1,11 @@
 export function getActiveElement (state) {
-    let el = state.activeElement;
+    const groupID = state.groupID;
+    const slideID = state.slideID;
+    const layerID = state.layerID;
 
-    if(typeof el.group_index == 'undefined') return null;
-
-    if(typeof el.layer_index == 'undefined'){
-        return state.groups[el.group_index].slides[el.slide_index];
+    if(layerID == null){
+        return state.groups[groupID].slides[slideID];
     }else{
-        return state.groups[el.group_index].slides[el.slide_index].layers[el.layer_index];
+        return state.groups[groupID].slides[slideID].layers[layerID];
     }
 }

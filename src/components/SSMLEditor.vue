@@ -185,7 +185,6 @@ export default defineComponent({
   data() {
       return {
             title: this.entry.title,
-            ssml: this.entry.ssml,
             input: this.entry.input,
             tts_settings,
             tts_language_selection: 'de-DE',

@@ -1,3 +1,5 @@
+import { uid } from 'quasar'
+
 export const updateTitle = (state, title) => {
     state.title = title;
 }
@@ -14,20 +16,22 @@ export const updateGroups = (state, groups) => {
 export const createGroup = (state) => {
     state.groups.push(
         {
+            uid: uid(),
             title: 'New Group',
             slides: []
         }
     );
 }
 
-export const deleteGroup = (state, group_index) => {
-    state.groups.splice(group_index, 1);
+export const deleteGroup = (state, groupID) => {
+    state.groups.splice(groupID, 1);
 }
 
 // SLIDE
-export const createSlide = (state, group_index) => {
-    state.groups[group_index].slides.push(
+export const createSlide = (state, groupID) => {
+    state.groups[groupID].slides.push(
         {
+            uid: uid(),
             title: 'New Slide',
             export: false,
             layers: []
@@ -35,37 +39,54 @@ export const createSlide = (state, group_index) => {
     )
 }
 
-export const deleteSlide = (state, {group_index, slide_index}) => {
-    state.groups[group_index].slides.splice(slide_index, 1);
+export const deleteSlide = (state, {groupID, slideID}) => {
+    state.groups[groupID].slides.splice(slideID, 1);
 }
 
 // LAYER
-export const createLayer = (state, {group_index, slide_index}) => {
-    state.groups[group_index].slides[slide_index].layers.push(
+export const createLayer = (state, {groupID, slideID}) => {
+    state.groups[groupID].slides[slideID].layers.push(
         {
+            uid: uid(),
             title: 'New Layer',
             export: false
         }
     );
 }
 
-export const deleteLayer = (state, {group_index, slide_index, layer_index}) => {
-    state.groups[group_index].slides[slide_index].layers.splice(layer_index, 1);
+export const deleteLayer = (state, {groupID, slideID, layerID}) => {
+    state.groups[groupID].slides[slideID].layers.splice(layerID, 1);
+}
+
+// ENTRY
+export const createEntry = (state) => {
+    const newEntry = {
+        uid: uid(),
+        title: 'Enter Title',
+        ssml: true,
+        input: 'Enter Text'
+    }
+
+    if(state.layerID == null){
+        return state.groups[state.groupID].slides[state.slideID].entries.push(newEntry);
+    }else{
+        return state.groups[state.groupID].slides[state.slideID].layers[state.layerID].entries.push(newEntry);
+    }
 }
 
 // SET EXPORT
-export const toggleExportSlide = (state, {group_index, slide_index}) => {
-    state.groups[group_index].slides[slide_index].export !=
-    state.groups[group_index].slides[slide_index].export;
+export const toggleExportSlide = (state, {groupID, slideID}) => {
+    state.groups[groupID].slides[slideID].export !=
+    state.groups[groupID].slides[slideID].export;
 }
 
-export const toggleExportLayer = (state, {group_index, slide_index, layer_index}) => {
-    state.groups[group_index].slides[slide_index].layers[layer_index].export !=
-    state.groups[group_index].slides[slide_index].layers[layer_index].export;
+export const toggleExportLayer = (state, {groupID, slideID, layerID}) => {
+    state.groups[groupID].slides[slideID].layers[layerID].export !=
+    state.groups[groupID].slides[slideID].layers[layerID].export;
 }
 
 // SET ACTIVE
-export const setAllInactive = (state) => {
+export const updateActive = (state) => {
     state.groups.forEach(group => {
         group.slides.forEach(slide => {
             slide.active = false;
@@ -75,14 +96,22 @@ export const setAllInactive = (state) => {
             });
         });
     });
+
+    if(state.layerID == null){
+        return state.groups[state.groupID].slides[state.slideID].active = true;
+    }else{
+        return state.groups[state.groupID].slides[state.slideID].layers[state.layerID].active = true;
+    }
 }
 
-export const setActiveSlide = (state, {group_index, slide_index}) => {
-    state.groups[group_index].slides[slide_index].active = true;
-    state.activeElement = {group_index, slide_index};
+export const setGroupID = (state, groupID) => {
+    state.groupID = groupID;
 }
 
-export const setActiveLayer = (state, {group_index, slide_index, layer_index}) => {
-    state.groups[group_index].slides[slide_index].layers[layer_index].active = true;
-    state.activeElement = {group_index, slide_index, layer_index};
+export const setSlideID = (state, slideID) => {
+    state.slideID = slideID;
+}
+
+export const setLayerID = (state, layerID) => {
+    state.layerID = layerID;
 }

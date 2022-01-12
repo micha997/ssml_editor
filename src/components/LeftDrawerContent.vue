@@ -2,7 +2,7 @@
     <q-list>
         <!--GROUP-->
         <q-expansion-item
-        v-for="(group, i) in groups" :key="i"
+        v-for="(group, groupID) in groups" :key="groupID"
         :group="store.state.title"
         expand-icon-toggle
         :expand-icon-class="group.slides.length > 0 ? '' : 'hidden'"
@@ -31,7 +31,7 @@
 
                 <q-separator/>
 
-                <q-item clickable v-close-popup @click="CreateSlide(i)">
+                <q-item clickable v-close-popup @click="CreateSlide(groupID)">
                 <q-item-section side>
                     <q-icon name="add"/>
                 </q-item-section>
@@ -40,7 +40,7 @@
                 </q-item-section>
                 </q-item>
 
-                <q-item clickable v-close-popup @click="DeleteGroup(i)">
+                <q-item clickable v-close-popup @click="DeleteGroup(groupID)">
                 <q-item-section side>
                     <q-icon name="delete"/>
                 </q-item-section>
@@ -54,9 +54,9 @@
 
         <!--GROUP > SLIDE-->
         <q-expansion-item
-            v-for="(slide, j) in group.slides" :key="j"
+            v-for="(slide, slideID) in group.slides" :key="slideID"
             :group="group.title"
-            @click="SetActiveSlide(i, j)"
+            @click="setActiveElement(groupID, slideID)"
             :content-inset-level="0.5"
             default-closed
             :expand-icon-class="slide.layers.length > 0 ? '' : 'hidden'"
@@ -84,7 +84,7 @@
 
                 <q-separator/>
 
-                <q-item clickable v-close-popup @click="CreateLayer(i, j)">
+                <q-item clickable v-close-popup @click="CreateLayer(groupID, slideID)">
                     <q-item-section side>
                         <q-icon name="add"/>
                     </q-item-section>
@@ -93,7 +93,7 @@
                     </q-item-section>
                 </q-item>
 
-                <q-item clickable v-close-popup @click="DeleteSlide(i, j)">
+                <q-item clickable v-close-popup @click="DeleteSlide(groupID, slideID)">
                     <q-item-section side>
                         <q-icon name="delete"/>
                     </q-item-section>
@@ -107,9 +107,9 @@
 
             <!--GROUP > SLIDE > LAYER-->
             <q-item
-            v-for="(layer, k) in slide.layers" :key="k"
+            v-for="(layer, layerID) in slide.layers" :key="layerID"
             :class="{'bg-indigo-1': layer.active}"
-            clickable v-ripple @click="SetActiveLayer(i, j, k)">
+            clickable v-ripple @click="setActiveElement(groupID, slideID, layerID)">
                 <q-item-section avatar>
                 <q-icon size="sm" flat round name="layers" color="indigo-3"/>
                 </q-item-section>
@@ -132,7 +132,7 @@
 
                     <q-separator/>
 
-                    <q-item clickable v-close-popup @click="DeleteLayer(i, j, k)">
+                    <q-item clickable v-close-popup @click="DeleteLayer(groupID, slideID, layerID)">
                         <q-item-section side>
                             <q-icon name="delete"/>
                         </q-item-section>
@@ -176,11 +176,8 @@ export default defineComponent({
       }
   },
   methods: {
-    SetActiveSlide(group_index, slide_index){
-        this.store.dispatch('project/SetActiveSlide', {group_index, slide_index});
-    },
-    SetActiveLayer(group_index, slide_index, layer_index){
-        this.store.dispatch('project/SetActiveLayer', {group_index, slide_index, layer_index});
+    setActiveElement(groupID = null, slideID = null, layerID = null){
+        this.store.dispatch('project/SetActiveElement', {groupID, slideID, layerID});
     },
     CreateGroup(){
         this.store.commit('project/createGroup');
