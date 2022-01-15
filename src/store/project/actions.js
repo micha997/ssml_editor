@@ -1,5 +1,10 @@
 import story from '../../components/StoryPlaceholder.js'
 
+export function CreateProject (context, title) {
+    context.commit('clearProject');
+    context.commit('updateTitle', title);
+}
+
 export function LoadExampleProject (context) {
     context.commit('updateTitle', story.title);
     context.commit('updateTTSSettings', story.tts_settings);

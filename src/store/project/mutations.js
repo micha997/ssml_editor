@@ -1,5 +1,21 @@
 import { uid } from 'quasar'
 
+export const clearProject = (state) => {
+    state.title = '';
+    state.tts_settings = {
+        voice: {
+            languageCode: "de-DE",
+            name: "de-DE-Wavenet-F"
+        },
+        audioConfig: {
+            audioEncoding: "MP3",
+            pitch: 0,
+            speakingRate: 1
+        }
+    }
+    state.groups = [];
+}
+
 export const updateTitle = (state, title) => {
     state.title = title;
 }
@@ -34,7 +50,8 @@ export const createSlide = (state, groupID) => {
             uid: uid(),
             title: 'New Slide',
             export: false,
-            layers: []
+            layers: [],
+            entries: []
         }
     )
 }
@@ -49,7 +66,8 @@ export const createLayer = (state, {groupID, slideID}) => {
         {
             uid: uid(),
             title: 'New Layer',
-            export: false
+            export: false,
+            entries: []
         }
     );
 }

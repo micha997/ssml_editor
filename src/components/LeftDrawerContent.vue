@@ -182,20 +182,20 @@ export default defineComponent({
     CreateGroup(){
         this.store.commit('project/createGroup');
     },
-    DeleteGroup(group_index){
-        this.store.commit('project/deleteGroup', group_index);
+    DeleteGroup(groupID){
+        this.store.commit('project/deleteGroup', groupID);
     },
-    CreateSlide(group_index){
-        this.store.commit('project/createSlide', group_index);
+    CreateSlide(groupID){
+        this.store.commit('project/createSlide', groupID);
     },
-    DeleteSlide(group_index, slide_index){
-        this.store.commit('project/deleteSlide', {group_index, slide_index});
+    DeleteSlide(groupID, slideID){
+        this.store.commit('project/deleteSlide', {groupID, slideID});
     },
-    CreateLayer(group_index, slide_index){
-        this.store.commit('project/createLayer', {group_index, slide_index});
+    CreateLayer(groupID, slideID){
+        this.store.commit('project/createLayer', {groupID, slideID});
     },
-    DeleteLayer(group_index, slide_index, layer_index){
-        this.store.commit('project/deleteLayer', {group_index, slide_index, layer_index});
+    DeleteLayer(groupID, slideID, layerID){
+        this.store.commit('project/deleteLayer', {groupID, slideID, layerID});
     }
   }
 })

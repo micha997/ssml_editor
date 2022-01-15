@@ -28,7 +28,7 @@
 
             <q-card-actions align="center" class="text-primary">
                 <q-btn flat label="Cancel" @click="create_visible = false; create_project_title = '';"/>
-                <q-btn flat label="Create" v-close-popup @click="$router.replace('/project')"/>
+                <q-btn flat label="Create" v-close-popup @click="CreateProject()"/>
             </q-card-actions>
         </div>
       </q-slide-transition>
@@ -104,6 +104,10 @@ export default defineComponent({
     }
   },
   methods: {
+    CreateProject(){
+      this.$store.dispatch('project/CreateProject', this.create_project_title);
+      this.$router.replace('/project')
+    },
     Upload(){
       this.$router.replace('/project');
     },

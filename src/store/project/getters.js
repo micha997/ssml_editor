@@ -3,6 +3,8 @@ export function getActiveElement (state) {
     const slideID = state.slideID;
     const layerID = state.layerID;
 
+    if(groupID == null || slideID == null) return null;
+
     if(layerID == null){
         return state.groups[groupID].slides[slideID];
     }else{

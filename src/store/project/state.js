@@ -2,15 +2,10 @@ export default function () {
   return {
     title: 'Enter Project Title',
     tts_settings: {},
-    groups: [
-      {
-        title: 'Your first group',
-        slides: []
-      }
-    ],
+    groups: [],
 
-    groupID: 0,
-    slideID: 0,
+    groupID: null,
+    slideID: null,
     layerID: null,
   }
 }

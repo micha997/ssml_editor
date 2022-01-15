@@ -2,7 +2,7 @@
   <q-page>
     <q-resize-observer @resize="onResize"/>
     <div :style="style">
-      <q-scroll-area v-if="storeElement.entries" style="flex: 1;" class="q-pa-md">
+      <q-scroll-area v-if="storeElement != null" style="flex: 1;" class="q-pa-md">
         <SSMLEditor
           v-for="entry in storeElement.entries"
           :key="entry.uid"
