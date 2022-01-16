@@ -37,7 +37,7 @@
                         <q-btn flat dense round size="md" icon="more_vert">
                             <q-menu>
                                 <q-list>
-                                    <q-item clickable v-close-popup>
+                                    <q-item clickable v-close-popup @click="DeleteSelf()">
                                         <q-item-section side>
                                             <q-icon name="delete"/>
                                         </q-item-section>
@@ -172,20 +172,41 @@
 </template>
 
 <script>
-import { defineComponent } from 'vue'
+import { defineComponent, computed } from 'vue'
+import { useStore } from 'vuex'
 import tts_settings from '../components/TTSSettingsPlaceholder.js'
 
 export default defineComponent({
   name: 'SSMLEditor',
   props: {
+      entryID: {
+          type: Number
+      },
       entry: {
           type: Object,
       }
   },
+  setup(props) {
+      const store = useStore();
+
+      const title = computed({
+          get: () => store.getters['project/getEntryTitle'](props.entryID),
+          set: val => store.commit('project/updateEntryTitle', {entryID: props.entryID, title: val})
+      })
+
+      const input = computed({
+          get: () => store.getters['project/getEntryInput'](props.entryID),
+          set: val => store.commit('project/updateEntryInput', {entryID: props.entryID, input: val})
+      })
+
+      return {
+          store,
+          title,
+          input
+      }
+  },
   data() {
       return {
-            title: this.entry.title,
-            input: this.entry.input,
             tts_settings,
             tts_language_selection: 'de-DE',
             tts_voice_selection: 'de-DE-Wavenet-F',
@@ -202,6 +223,11 @@ export default defineComponent({
                 ['phoneme'],
             ],
             expanded: true
+      }
+  },
+  methods: {
+      DeleteSelf(){
+          this.store.commit('project/deleteEntry', this.$props.entryID);
       }
   }
 })

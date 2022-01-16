@@ -4,8 +4,9 @@
     <div :style="style">
       <q-scroll-area v-if="storeElement != null" style="flex: 1;" class="q-pa-md">
         <SSMLEditor
-          v-for="entry in storeElement.entries"
+          v-for="(entry, entryID) in storeElement.entries"
           :key="entry.uid"
+          :entryID="entryID"
           :entry="entry"/>
         <q-card flat bordered>
           <q-card-section class="flex row justify-center items-center">

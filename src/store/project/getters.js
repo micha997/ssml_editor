@@ -11,3 +11,15 @@ export function getActiveElement (state) {
         return state.groups[groupID].slides[slideID].layers[layerID];
     }
 }
+
+export const getEntryTitle = (state) => (entryID) => {
+    const element = getActiveElement(state);
+
+    return element.entries[entryID].title;
+}
+
+export const getEntryInput = (state) => (entryID) => {
+    const element = getActiveElement(state);
+
+    return element.entries[entryID].input;
+}

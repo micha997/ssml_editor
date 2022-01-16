@@ -24,8 +24,11 @@
                     <q-item-section>
                         <q-item-label>Edit Title</q-item-label>
                     </q-item-section>
-                    <q-popup-edit v-model="group.title" auto-save v-slot="scope">
-                    <q-input v-model="scope.value" dense autofocus counter @keyup.enter="scope.set" />
+                    <q-popup-edit v-model="group.title" v-slot="scope">
+                        <q-input
+                            v-model="scope.value"
+                            dense autofocus
+                            @keyup.enter="UpdateGroupTitle(groupID, scope)" />
                     </q-popup-edit>
                 </q-item>
 
@@ -77,8 +80,11 @@
                     <q-item-section>
                         <q-item-label>Edit Title</q-item-label>
                     </q-item-section>
-                    <q-popup-edit v-model="slide.title" auto-save v-slot="scope">
-                        <q-input v-model="scope.value" dense autofocus counter @keyup.enter="scope.set" />
+                    <q-popup-edit v-model="slide.title" v-slot="scope">
+                        <q-input
+                            v-model="scope.value"
+                            dense autofocus
+                            @keyup.enter="UpdateSlideTitle(groupID, slideID, scope)" />
                     </q-popup-edit>
                 </q-item>
 
@@ -125,8 +131,11 @@
                         <q-item-section>
                             <q-item-label>Edit Title</q-item-label>
                         </q-item-section>
-                        <q-popup-edit v-model="layer.title" auto-save v-slot="scope">
-                        <q-input v-model="scope.value" dense autofocus counter @keyup.enter="scope.set" />
+                        <q-popup-edit v-model="layer.title" v-slot="scope">
+                            <q-input
+                                v-model="scope.value"
+                                dense autofocus
+                                @keyup.enter="UpdateLayerTitle(groupID, slideID, layerID, scope)" />
                         </q-popup-edit>
                     </q-item>
 
@@ -185,18 +194,30 @@ export default defineComponent({
     DeleteGroup(groupID){
         this.store.commit('project/deleteGroup', groupID);
     },
+    UpdateGroupTitle(groupID, scope){
+        this.store.commit('project/updateGroupTitle', {groupID, title: scope.value})
+        scope.cancel();
+    },
     CreateSlide(groupID){
         this.store.commit('project/createSlide', groupID);
     },
     DeleteSlide(groupID, slideID){
         this.store.commit('project/deleteSlide', {groupID, slideID});
     },
+    UpdateSlideTitle(groupID, slideID, scope){
+        this.store.commit('project/updateSlideTitle', {groupID, slideID, title: scope.value})
+        scope.cancel();
+    },
     CreateLayer(groupID, slideID){
         this.store.commit('project/createLayer', {groupID, slideID});
     },
     DeleteLayer(groupID, slideID, layerID){
         this.store.commit('project/deleteLayer', {groupID, slideID, layerID});
-    }
+    },
+    UpdateLayerTitle(groupID, slideID, layerID, scope){
+        this.store.commit('project/updateLayerTitle', {groupID, slideID, layerID, title: scope.value})
+        scope.cancel();
+    },
   }
 })
 </script>

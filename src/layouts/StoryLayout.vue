@@ -8,7 +8,7 @@
         <q-toolbar-title class="cursor-pointer">
           {{projectTitle}}
           <q-popup-edit v-model="projectTitle" auto-save v-slot="scope">
-            <q-input v-model="scope.value" dense autofocus counter @keyup.enter="scope.set" />
+            <q-input v-model="scope.value" dense autofocus @keyup.enter="scope.set" />
           </q-popup-edit>
         </q-toolbar-title>
         <q-space ></q-space>

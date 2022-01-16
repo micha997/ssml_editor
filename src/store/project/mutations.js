@@ -1,4 +1,5 @@
 import { uid } from 'quasar'
+import { getActiveElement } from './getters';
 
 export const clearProject = (state) => {
     state.title = '';
@@ -43,6 +44,10 @@ export const deleteGroup = (state, groupID) => {
     state.groups.splice(groupID, 1);
 }
 
+export const updateGroupTitle = (state, {groupID, title}) => {
+    state.groups[groupID].title = title;
+}
+
 // SLIDE
 export const createSlide = (state, groupID) => {
     state.groups[groupID].slides.push(
@@ -58,6 +63,10 @@ export const createSlide = (state, groupID) => {
 
 export const deleteSlide = (state, {groupID, slideID}) => {
     state.groups[groupID].slides.splice(slideID, 1);
+}
+
+export const updateSlideTitle = (state, {groupID, slideID, title}) => {
+    state.groups[groupID].slides[slideID].title = title;
 }
 
 // LAYER
@@ -76,20 +85,40 @@ export const deleteLayer = (state, {groupID, slideID, layerID}) => {
     state.groups[groupID].slides[slideID].layers.splice(layerID, 1);
 }
 
+export const updateLayerTitle = (state, {groupID, slideID, layerID, title}) => {
+    state.groups[groupID].slides[slideID].layers[layerID].title = title;
+}
+
 // ENTRY
 export const createEntry = (state) => {
-    const newEntry = {
-        uid: uid(),
-        title: 'Enter Title',
-        ssml: true,
-        input: 'Enter Text'
-    }
+    const element = getActiveElement(state);
 
-    if(state.layerID == null){
-        return state.groups[state.groupID].slides[state.slideID].entries.push(newEntry);
-    }else{
-        return state.groups[state.groupID].slides[state.slideID].layers[state.layerID].entries.push(newEntry);
-    }
+    element.entries.push(
+        {
+            uid: uid(),
+            title: 'Enter Title',
+            ssml: true,
+            input: 'Enter Text'
+        }
+    );
+}
+
+export const deleteEntry = (state, entryID) => {
+    const element = getActiveElement(state);
+
+    element.entries.splice(entryID, 1);
+}
+
+export const updateEntryTitle = (state, {entryID, title}) => {
+    const element = getActiveElement(state);
+
+    element.entries[entryID].title = title;
+}
+
+export const updateEntryInput = (state, {entryID, input}) => {
+    const element = getActiveElement(state);
+
+    element.entries[entryID].input = input;
 }
 
 // SET EXPORT
@@ -115,11 +144,9 @@ export const updateActive = (state) => {
         });
     });
 
-    if(state.layerID == null){
-        return state.groups[state.groupID].slides[state.slideID].active = true;
-    }else{
-        return state.groups[state.groupID].slides[state.slideID].layers[state.layerID].active = true;
-    }
+    const element = getActiveElement(state);
+
+    element.active = true;
 }
 
 export const setGroupID = (state, groupID) => {
