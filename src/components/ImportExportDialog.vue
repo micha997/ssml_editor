@@ -48,11 +48,14 @@
 
 <script>
 import { defineComponent } from 'vue'
+import { useStore } from 'vuex'
 
 export default defineComponent({
   name: 'ImportExportDialog',
   data(){
     return{
+      $store: useStore(),
+
       visible: false,
       uploadPath: null,
     }
@@ -63,7 +66,12 @@ export default defineComponent({
       console.log(this.uploadPath);
     },
     Download(){
-      console.log("Download");
+      require("downloadjs")
+      (
+        this.$store.getters['project/getJsonData'],
+        this.$store.state.project.title.replace(/ /g,"_") + ".json",
+        "text/plain"
+      );
     }
   }
 })
