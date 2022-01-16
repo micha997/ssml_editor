@@ -53,7 +53,7 @@
         <div v-show="load_visible">
             <q-separator />
             <q-card-section>
-                <q-file outlined clearable v-model="uploadPath" accept=".json, application/json">
+                <q-file outlined clearable v-model="jsonFile" accept=".json, application/json">
                     <template v-slot:prepend>
                     <q-icon name="attach_file" />
                     </template>
@@ -100,7 +100,7 @@ export default defineComponent({
       create_visible: false,
       create_project_title: '',
       load_visible: false,
-      uploadPath: null
+      jsonFile: null
     }
   },
   methods: {
@@ -109,6 +109,12 @@ export default defineComponent({
       this.$router.replace('/project')
     },
     Upload(){
+      const reader = new FileReader();
+      reader.onload = e => {
+        this.$store.dispatch('project/LoadProjectFromFile', JSON.parse(e.target.result))
+      };
+      reader.readAsText(this.jsonFile);
+
       this.$router.replace('/project');
     },
     LoadExampleProject(){

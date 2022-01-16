@@ -5,6 +5,12 @@ export function CreateProject (context, title) {
     context.commit('updateTitle', title);
 }
 
+export function LoadProjectFromFile (context, project) {
+    context.commit('updateTitle', project.title);
+    context.commit('updateTTSSettings', project.tts_settings);
+    context.commit('updateGroups', project.groups);
+}
+
 export function LoadExampleProject (context) {
     context.commit('updateTitle', story.title);
     context.commit('updateTTSSettings', story.tts_settings);

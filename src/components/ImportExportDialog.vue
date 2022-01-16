@@ -31,11 +31,11 @@
       </q-card-section>
 
       <q-card-section>
-          <q-file outlined clearable v-model="uploadPath" accept=".json, application/json">
-            <template v-slot:prepend>
-              <q-icon name="attach_file" />
-            </template>
-          </q-file>
+        <q-file outlined clearable v-model="jsonFile" accept=".json, application/json">
+          <template v-slot:prepend>
+            <q-icon name="attach_file" />
+          </template>
+        </q-file>
       </q-card-section>
 
       <q-card-actions align="right" class="text-primary">
@@ -57,13 +57,16 @@ export default defineComponent({
       $store: useStore(),
 
       visible: false,
-      uploadPath: null,
+      jsonFile: null,
     }
   },
   methods: {
     Upload(){
-      console.log("Upload");
-      console.log(this.uploadPath);
+      const reader = new FileReader();
+      reader.onload = e => {
+        this.$store.dispatch('project/LoadProjectFromFile', JSON.parse(e.target.result))
+      };
+      reader.readAsText(this.jsonFile);
     },
     Download(){
       require("downloadjs")
