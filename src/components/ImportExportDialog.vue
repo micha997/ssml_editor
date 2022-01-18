@@ -71,9 +71,8 @@ export default defineComponent({
     Download(){
       require("downloadjs")
       (
-        this.$store.getters['project/getJsonData'],
-        this.$store.state.project.title.replace(/ /g,"_") + ".json",
-        "text/plain"
+        'data:text/json;charset=utf-8,' + encodeURIComponent(this.$store.getters['project/getJsonData']),
+        this.$store.state.project.title.replace(/ /g,"_") + ".json", "text/plain"
       );
     }
   }

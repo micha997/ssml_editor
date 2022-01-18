@@ -1,0 +1,252 @@
+{
+	"title": "Wissenschaftliche Vertiefung",
+	"groups": [
+		{
+			"uid": "45df916d-cc94-4636-b6c3-56cf7eb96162",
+			"title": "1 Home",
+			"slides": [
+				{
+					"uid": "8b1dae4a-77ea-4085-9ca8-df6a62f4cd2d",
+					"title": "Wähle deinen Modus",
+					"export": false,
+					"layers": [
+						{
+							"uid": "f7058fa5-920f-454d-850f-0b4670f5a004",
+							"title": "Webmodus",
+							"export": false,
+							"entries": [
+								{
+									"uid": "aa06a7e9-b4ec-4acd-bd52-8192de13ab2c",
+									"title": "Webmodus TTS 1",
+									"ssml": true,
+									"input": "At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet."
+								},
+								{
+									"uid": "3b49e4b0-56ce-48e2-a938-4f3cac2bd42b",
+									"title": "Webmodus TTS 2",
+									"ssml": true,
+									"input": "Enter Text"
+								}
+							],
+							"active": false
+						},
+						{
+							"uid": "38a53a26-3452-4ed4-b3a1-aa39cc10578a",
+							"title": "Sprachassistent",
+							"export": false,
+							"entries": [
+								{
+									"uid": "8c954f3e-ec5b-4054-8d1e-25f7b48aa31f",
+									"title": "Sprachassistent TTS 1",
+									"ssml": true,
+									"input": "Enter Text"
+								},
+								{
+									"uid": "62ffdcd9-abd7-45e1-aa2d-a4969ec63686",
+									"title": "Sprachassistent TTS 2",
+									"ssml": true,
+									"input": "At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet."
+								}
+							],
+							"active": false
+						}
+					],
+					"entries": [
+						{
+							"uid": "3d1bc535-2e79-415f-b4f8-32d2b61e8735",
+							"title": "Einleitung",
+							"ssml": true,
+							"input": "Willkommen"
+						},
+						{
+							"uid": "774bc23e-9eee-496d-829a-c423833adc59",
+							"title": "Erlaeuterung",
+							"ssml": true,
+							"input": "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua."
+						}
+					],
+					"active": true
+				},
+				{
+					"uid": "02e6bd54-1312-4340-9702-7c3e8b2e70e7",
+					"title": "Home Basis",
+					"export": false,
+					"layers": [],
+					"entries": [
+						{
+							"uid": "0d608a5f-1540-49f4-8de5-53300e20976b",
+							"title": "Willkommen",
+							"ssml": true,
+							"input": "Hello there"
+						}
+					],
+					"active": false
+				}
+			]
+		},
+		{
+			"uid": "e8c007c6-d5b9-410f-b4c7-f5dcda5f3f7c",
+			"title": "4 Plagiieren",
+			"slides": [
+				{
+					"uid": "9df3084e-626c-4751-9666-04ff0f2f891f",
+					"title": "C Übersicht",
+					"export": false,
+					"layers": [],
+					"entries": [],
+					"active": false
+				},
+				{
+					"uid": "914cccae-9934-4fbc-80e6-3a058b00ee88",
+					"title": "C1 Plagiat oder Fehler",
+					"export": false,
+					"layers": [],
+					"entries": [],
+					"active": false
+				},
+				{
+					"uid": "de50a119-611a-4717-9014-4daf448b60be",
+					"title": "C1 Plagiat oder Fehler ENDE",
+					"export": false,
+					"layers": [],
+					"entries": [],
+					"active": false
+				},
+				{
+					"uid": "74cb3e2f-47b0-4a75-aed4-98ccf288824f",
+					"title": "C2 Plagiatsformen",
+					"export": false,
+					"layers": [],
+					"entries": [],
+					"active": false
+				},
+				{
+					"uid": "2a72df35-bfdd-40eb-9f51-c257088990d5",
+					"title": "C2.1 Plagiatsformen",
+					"export": false,
+					"layers": [],
+					"entries": [],
+					"active": false
+				},
+				{
+					"uid": "48ac39da-72b9-4af3-844b-a72ccfa31fd4",
+					"title": "C2.2 Plagiatsformen",
+					"export": false,
+					"layers": [],
+					"entries": [],
+					"active": false
+				}
+			]
+		},
+		{
+			"uid": "0c6b1ac0-b282-4337-b411-52ff9c5fefc8",
+			"title": "5 Gute wissenschaftliche Praxis",
+			"slides": [
+				{
+					"uid": "ce12a8d7-aba4-468a-af5c-a5467b80beba",
+					"title": "D Übersicht",
+					"export": false,
+					"layers": [],
+					"entries": [
+						{
+							"uid": "46973417-afa5-456c-8cd9-d2f4a302236a",
+							"title": "5D TTS 1",
+							"ssml": true,
+							"input": "Enter Text"
+						}
+					],
+					"active": false
+				},
+				{
+					"uid": "bf4f8088-efdf-46a0-9320-b3940b7c6e10",
+					"title": "D1 Definition",
+					"export": false,
+					"layers": [],
+					"entries": [
+						{
+							"uid": "9cf2a962-12e5-42c0-be0e-e5a51dbd0cda",
+							"title": "5D1 TTS 1",
+							"ssml": true,
+							"input": "Enter Text"
+						}
+					],
+					"active": false
+				},
+				{
+					"uid": "6a802b84-0f4a-411c-969c-e164e463e784",
+					"title": "D2 Urheberrecht",
+					"export": false,
+					"layers": [],
+					"entries": [
+						{
+							"uid": "e445d6df-fc7b-426e-a184-4e596edeeece",
+							"title": "5D2 TTS 1",
+							"ssml": true,
+							"input": "Enter Text"
+						},
+						{
+							"uid": "26f71d96-a8a7-495f-a285-abfea040c9d4",
+							"title": "5D1 TTS 2",
+							"ssml": true,
+							"input": "Enter Text"
+						}
+					],
+					"active": false
+				},
+				{
+					"uid": "9f86a5c7-a9cd-41f6-a10c-78dbc9b32cfa",
+					"title": "D3 Lizenzen",
+					"export": false,
+					"layers": [],
+					"entries": [
+						{
+							"uid": "3bec4564-942c-46ee-b433-7ebefc1db9ab",
+							"title": "5D3 TTS 1",
+							"ssml": true,
+							"input": "Enter Text"
+						}
+					],
+					"active": false
+				},
+				{
+					"uid": "606fa83b-22dd-45d8-9cad-a358fb02ec19",
+					"title": "D4 Wissenscheck",
+					"export": false,
+					"layers": [],
+					"entries": [
+						{
+							"uid": "7eceab30-523d-4c27-a585-773b59929680",
+							"title": "5D4 TTS 1",
+							"ssml": true,
+							"input": "Enter Text"
+						},
+						{
+							"uid": "d9588bfb-5f14-4775-ad83-2e475dc8f095",
+							"title": "5D4 TTS 2",
+							"ssml": true,
+							"input": "Enter Text"
+						},
+						{
+							"uid": "d5c7f1a0-3871-4fc8-aa22-fa91964b639a",
+							"title": "5D4 TTS 3",
+							"ssml": true,
+							"input": "Enter Text"
+						}
+					],
+					"active": false
+				}
+			]
+		}
+	],
+	"tts_settings": {
+		"voice": {
+			"languageCode": "de-DE",
+			"name": "de-DE-Wavenet-F"
+		},
+		"audioConfig": {
+			"audioEncoding": "MP3",
+			"pitch": 0,
+			"speakingRate": 1
+		}
+	}
+}

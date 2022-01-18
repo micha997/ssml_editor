@@ -63,22 +63,22 @@ export default defineComponent({
     RightDrawerContent
   },
   setup() {
-    const store = useStore()
+    const store = useStore();
 
     const leftDrawerState = computed({
       get: () => store.state.app.leftDrawerState,
       set: val => store.commit('app/updateLeftDrawerState', val)
-    })
+    });
 
     const rightDrawerState = computed({
       get: () => store.state.app.rightDrawerState,
       set: val => store.commit('app/updateRightDrawerState', val)
-    })
+    });
 
     const projectTitle = computed({
       get: () => store.state.project.title,
       set: val => store.commit('project/updateTitle', val)
-    })
+    });
 
     return {
       leftDrawerState,
@@ -86,6 +86,6 @@ export default defineComponent({
 
       projectTitle
     }
-  },
+  }
 })
 </script>

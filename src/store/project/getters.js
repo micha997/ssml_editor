@@ -30,6 +30,6 @@ export const getJsonData = (state) => {
     toJson.title = state.title;
     toJson.groups = state.groups;
     toJson.tts_settings = state.tts_settings;
-    
+
     return JSON.stringify(toJson, null, "\t");
 }

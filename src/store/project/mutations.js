@@ -21,6 +21,14 @@ export const updateTitle = (state, title) => {
     state.title = title;
 }
 
+export const updateProjectLanguageCode = (state, languageCode) => {
+    state.tts_settings.voice.languageCode = languageCode;
+}
+
+export const updateProjectVoiceName = (state, name) => {
+    state.tts_settings.voice.name = name;
+}
+
 export const updateTTSSettings = (state, tts_settings) => {
     state.tts_settings = tts_settings;
 }

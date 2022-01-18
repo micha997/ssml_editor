@@ -1,4 +1,4 @@
-import story from '../../components/StoryPlaceholder.js'
+import exampleProject from '../../components/projectExample.json'
 
 export function CreateProject (context, title) {
     context.commit('clearProject');
@@ -12,9 +12,9 @@ export function LoadProjectFromFile (context, project) {
 }
 
 export function LoadExampleProject (context) {
-    context.commit('updateTitle', story.title);
-    context.commit('updateTTSSettings', story.tts_settings);
-    context.commit('updateGroups', story.groups);
+    context.commit('updateTitle', exampleProject.title);
+    context.commit('updateTTSSettings', exampleProject.tts_settings);
+    context.commit('updateGroups', exampleProject.groups);
 }
 
 export function SetActiveElement (context, {groupID, slideID, layerID}) {
