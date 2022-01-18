@@ -122,14 +122,16 @@ export const updateEntryInput = (state, {entryID, input}) => {
 }
 
 // SET EXPORT
-export const toggleExportSlide = (state, {groupID, slideID}) => {
-    state.groups[groupID].slides[slideID].export !=
-    state.groups[groupID].slides[slideID].export;
-}
 
-export const toggleExportLayer = (state, {groupID, slideID, layerID}) => {
-    state.groups[groupID].slides[slideID].layers[layerID].export !=
-    state.groups[groupID].slides[slideID].layers[layerID].export;
+export const toggleExport = (state, {groupID, slideID, layerID}) => {
+
+    if (layerID == null){
+        state.groups[groupID].slides[slideID].export =
+        !state.groups[groupID].slides[slideID].export;
+    }else{
+        state.groups[groupID].slides[slideID].layers[layerID].export =
+        !state.groups[groupID].slides[slideID].layers[layerID].export;
+    }
 }
 
 // SET ACTIVE

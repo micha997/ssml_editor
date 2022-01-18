@@ -3,7 +3,7 @@
     <q-list>
         <!--GROUP-->
         <q-expansion-item
-            v-for="(group, i) in story.groups" :key="i"
+            v-for="(group, groupID) in groups" :key="groupID"
             dense expand-icon-toggle switch-toggle-side expand-separator
             :expand-icon-class="group.slides.length > 0 ? '' : 'invisible'"
             :content-inset-level="0.5" 
@@ -16,7 +16,7 @@
 
             <!--GROUP > SLIDE-->
             <q-expansion-item
-            v-for="(slide, j) in group.slides" :key="j"
+            v-for="(slide, slideID) in group.slides" :key="slideID"
             dense expand-icon-toggle switch-toggle-side
             :expand-icon-class="slide.layers.length > 0 ? '' : 'invisible'"
             :content-inset-level="1.5"
@@ -26,17 +26,17 @@
                 {{ slide.title }}
                 </q-item-section>
                 <q-item-section side>
-                <q-checkbox size="sm" v-model="slide.export" />
+                    <q-checkbox size="sm" :modelValue="slide.export" @update:modelValue="setToggle(groupID, slideID)"/>
                 </q-item-section>
             </template>
 
             <!--GROUP > SLIDE > LAYER-->
-            <q-item v-for="(layer, k) in slide.layers" :key="k" dense>
+            <q-item v-for="(layer, layerID) in slide.layers" :key="layerID" dense>
                 <q-item-section>
                     {{ layer.title }}
                 </q-item-section>
                 <q-item-section side>
-                    <q-checkbox size="sm" v-model="layer.export" />
+                    <q-checkbox size="sm" :modelValue="layer.export" @update:modelValue="setToggle(groupID, slideID, layerID)"/>
                 </q-item-section>
             </q-item>
 
@@ -58,16 +58,35 @@
 </template>
 
 <script>
-import { defineComponent } from 'vue'
+import { defineComponent, computed } from 'vue'
+import { useStore } from 'vuex'
 import story from '../components/StoryPlaceholder.js'
 
 export default defineComponent({
   name: 'RightDrawerContent',
+  setup() {
+      const store = useStore()
+
+      const groups = computed({
+          get: () => store.state.project.groups,
+          set: val => store.commit('project/updateGroups', val)
+      })
+
+      return {
+          store,
+          groups
+      }
+  },
   data() {
       return {
         story,
         exportTTS: true,
         exportVTT: false,
+      }
+  },
+  methods: {
+      setToggle(groupID, slideID, layerID = null){
+          this.store.commit('project/toggleExport', {groupID, slideID, layerID});
       }
   }
 })

@@ -27,14 +27,12 @@
 
     <q-drawer
       v-model="leftDrawerState"
-      show-if-above
       bordered :width="400">
         <LeftDrawerContent/>
     </q-drawer>
 
     <q-drawer
         v-model="rightDrawerState"
-        show-if-above
         side="right"
         bordered :width="400">
         <RightDrawerContent/>
