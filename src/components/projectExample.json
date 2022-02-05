@@ -240,8 +240,14 @@
 	],
 	"tts_settings": {
 		"voice": {
-			"languageCode": "de-DE",
-			"name": "de-DE-Wavenet-F"
+			"languageCode": {
+				"label": "German",
+				"value": "de-DE"
+			},
+			"name": {
+				"label": "Franziska",
+				"value": "de-DE-Wavenet-F"
+			}
 		},
 		"audioConfig": {
 			"audioEncoding": "MP3",

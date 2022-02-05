@@ -28,7 +28,7 @@
           style="width: 100%;"
           filled
           v-model="voiceName"
-          :options="tts_settings.voiceNames"
+          :options="filteredVoiceOptions"
           label="Voice" />
 
         <!--
@@ -89,6 +89,13 @@ export default defineComponent({
       visible: false,
       story,
       tts_settings
+    }
+  },
+  computed: {
+    filteredVoiceOptions() {
+      return tts_settings.voiceNames.filter(item => {
+        return item.value.includes(this.languageCode.value);
+      })
     }
   }
 })

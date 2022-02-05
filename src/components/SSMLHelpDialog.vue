@@ -31,9 +31,9 @@
       <q-slide-transition>
         <div v-show="break_visible">
             <q-card-section class="bg-grey-2">
-                <code>
-                  Step 1, take a deep breath. <break time="2000ms"/> Step 2, exhale.
-                </code>
+              <code>
+                Step 1, take a deep breath. <span>&lt;break time="2000ms"/&gt;</span> Step 2, exhale.
+              </code>
             </q-card-section>
         </div>
       </q-slide-transition>
@@ -170,3 +170,12 @@ export default defineComponent({
   }
 })
 </script>
+<style lang="scss">
+code {
+  span {
+    background: white;
+    padding: 2px 8px 2px 8px;
+    border-radius: 4px;
+  }
+}
+</style>

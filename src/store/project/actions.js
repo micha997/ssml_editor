@@ -1,17 +1,25 @@
 import exampleProject from '../../components/projectExample.json'
 
 export function CreateProject (context, title) {
+    context.commit('clearStorage');
     context.commit('clearProject');
+
     context.commit('updateTitle', title);
 }
 
 export function LoadProjectFromFile (context, project) {
+    context.commit('clearStorage');
+    context.commit('clearProject');
+
     context.commit('updateTitle', project.title);
     context.commit('updateTTSSettings', project.tts_settings);
     context.commit('updateGroups', project.groups);
 }
 
 export function LoadExampleProject (context) {
+    context.commit('clearStorage');
+    context.commit('clearProject');
+
     context.commit('updateTitle', exampleProject.title);
     context.commit('updateTTSSettings', exampleProject.tts_settings);
     context.commit('updateGroups', exampleProject.groups);
@@ -21,6 +29,7 @@ export function SaveToStorage (context) {
     context.commit('saveTitle');
     context.commit('saveTTSSettings');
     context.commit('saveGroups');
+
     context.commit('updateStorageState');
 }
 

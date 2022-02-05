@@ -27,7 +27,7 @@
                             v-if="tts_settings.voiceNames"
                             filled dense style="width: 200px"
                             v-model="tts_voice_selection"
-                            :options="tts_settings.voiceNames"
+                            :options="filteredVoiceOptions"
                             label="Voice" />
                     </div>
                 </q-item-section>
@@ -58,6 +58,7 @@
                 <q-separator />
                 <q-card-section class="q-pa-none">
                     <q-editor
+                        class="ssml-editor"
                         ref="editorRef"
                         flat style="line-height: 2rem;"
                         content-class="bg-indigo-1"
@@ -208,8 +209,14 @@ export default defineComponent({
   data() {
       return {
             tts_settings,
-            tts_language_selection: 'de-DE',
-            tts_voice_selection: 'de-DE-Wavenet-F',
+            tts_language_selection: {
+				"label": "German",
+				"value": "de-DE"
+			},
+            tts_voice_selection: {
+				"label": "Franziska",
+				"value": "de-DE-Wavenet-F"
+			},
             definitions: {},
             toolbar: [
                 ['viewsource'],
@@ -226,9 +233,16 @@ export default defineComponent({
       }
   },
   methods: {
-      DeleteSelf(){
-          this.store.commit('project/deleteEntry', this.$props.entryID);
-      }
+    DeleteSelf(){
+        this.store.commit('project/deleteEntry', this.$props.entryID);
+    }
+  },
+  computed: {
+    filteredVoiceOptions() {
+      return tts_settings.voiceNames.filter(item => {
+        return item.value.includes(this.tts_language_selection.value);
+      })
+    }
   }
 })
 </script>

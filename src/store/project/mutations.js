@@ -9,8 +9,14 @@ export const clearProject = (state) => {
     state.title = '';
     state.tts_settings = {
         voice: {
-            languageCode: "de-DE",
-            name: "de-DE-Wavenet-F"
+            languageCode: {
+                label: "German",
+                value: "de-DE"
+            },
+            name: {
+                label: "Franziska",
+                value: "de-DE-Wavenet-F"
+            },
         },
         audioConfig: {
             audioEncoding: "MP3",
@@ -25,8 +31,13 @@ export const clearProject = (state) => {
     state.layerID = null;
 }
 
+export const clearStorage = (state) => {
+    LocalStorage.clear();
+}
+
 export const updateStorageState = (state) => {
-    if(LocalStorage.getItem(KEY_TITLE) != null) state.dataInStorage = true;
+    if(LocalStorage.getItem(KEY_TITLE) !== null) state.dataInStorage = true;
+    else state.dataInStorage = false;
 }
 
 //#region Title

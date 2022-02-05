@@ -1,23 +1,16 @@
 // app global css in SCSS form
-say-as {
-    color: red;
-}
-break {
-    &:before{
-        content: "Break " attr(time);
-        color: white;
-        padding: 2px 8px 2px 8px;
-        background-color: cornflowerblue;
-        border-radius: 4px;
+ssml-editor {
+    say-as {
+        color: red;
     }
-}
 
-code break {
-    &:before{
-        content: "";
-        color: white;
-        padding: 0;
-        background-color: none;
-        border-radius: 0px;
+    break {
+        &:before{
+            content: "Break " attr(time);
+            color: white;
+            padding: 2px 8px 2px 8px;
+            background-color: cornflowerblue;
+            border-radius: 4px;
+        }
     }
 }
