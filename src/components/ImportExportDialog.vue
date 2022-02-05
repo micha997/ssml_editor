@@ -19,6 +19,15 @@
             <q-item-label>Download Project</q-item-label>
           </q-item-section>
         </q-item>
+
+        <q-item v-if="$store.state.project.dataInStorage" clickable v-close-popup @click="Load()">
+          <q-item-section side>
+            <q-icon name="update"/>
+          </q-item-section>
+          <q-item-section>
+            <q-item-label>Load Project</q-item-label>
+          </q-item-section>
+        </q-item>
       </q-list>
     </q-menu>
   </q-btn>
@@ -47,6 +56,7 @@
 </template>
 
 <script>
+import { useQuasar } from 'quasar'
 import { defineComponent } from 'vue'
 import { useStore } from 'vuex'
 
@@ -54,11 +64,16 @@ export default defineComponent({
   name: 'ImportExportDialog',
   data(){
     return{
+      $q: useQuasar(),
       $store: useStore(),
 
       visible: false,
       jsonFile: null,
     }
+  },
+  mounted(){
+    this.$store.commit('project/updateStorageState');
+    if(this.$store.state.project.dataInStorage) this.$store.dispatch('project/LoadFromStorage');
   },
   methods: {
     Upload(){
@@ -74,6 +89,13 @@ export default defineComponent({
         'data:text/json;charset=utf-8,' + encodeURIComponent(this.$store.getters['project/getJsonData']),
         this.$store.state.project.title.replace(/ /g,"_") + ".json", "text/plain"
       );
+    },
+    Load(){
+      this.$store.dispatch('project/LoadFromStorage');
+      this.$q.notify({
+        type: 'positive',
+        message: 'Your project has been loaded from the browser storage.'
+      })
     }
   }
 })

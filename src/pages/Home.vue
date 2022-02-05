@@ -5,6 +5,22 @@
         <div class="text-h6">SSML Editor</div>
       </q-card-section>
 
+      <!--Load Project From Browser Storage-->
+      <q-card-section v-if="$store.state.project.dataInStorage">
+        <q-item class="no-padding">
+          <q-item-section avatar>
+            <q-btn round color="primary" icon="update" @click="Load()"/>
+          </q-item-section>
+
+          <q-item-section>
+            <q-item-label>Load Project From Browser Storage</q-item-label>
+            <q-item-label caption>Load a project you have already saved to the local browser storage.</q-item-label>
+          </q-item-section>
+        </q-item>
+      </q-card-section>
+
+      <q-separator v-if="$store.state.project.dataInStorage" inset/>
+
       <!--New Project-->
       <q-card-section>
         <q-item class="no-padding">
@@ -88,6 +104,7 @@
 </template>
 
 <script>
+import { useQuasar } from 'quasar'
 import { defineComponent } from 'vue';
 import { useStore } from 'vuex'
 
@@ -95,13 +112,17 @@ export default defineComponent({
   name: 'Home',
   data(){
     return{
+      $q: useQuasar(),
       $store: useStore(),
       
       create_visible: false,
       create_project_title: '',
       load_visible: false,
-      jsonFile: null
+      jsonFile: null,
     }
+  },
+  mounted(){
+    this.$store.commit('project/updateStorageState');
   },
   methods: {
     CreateProject(){
@@ -114,6 +135,16 @@ export default defineComponent({
         this.$store.dispatch('project/LoadProjectFromFile', JSON.parse(e.target.result))
       };
       reader.readAsText(this.jsonFile);
+
+      this.$router.replace('/project');
+    },
+    Load(){
+      this.$store.dispatch('project/LoadFromStorage');
+
+      this.$q.notify({
+        type: 'positive',
+        message: 'Your project has been loaded from the browser storage.'
+      })
 
       this.$router.replace('/project');
     },

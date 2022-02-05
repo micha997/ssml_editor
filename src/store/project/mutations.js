@@ -1,5 +1,9 @@
-import { uid } from 'quasar'
+import { LocalStorage, uid } from 'quasar'
 import { getActiveElement } from './getters';
+
+const KEY_TITLE = '_title';
+const KEY_TTSSETTINGS = '_ttssettings';
+const KEY_GROUPS = '_groups';
 
 export const clearProject = (state) => {
     state.title = '';
@@ -15,12 +19,31 @@ export const clearProject = (state) => {
         }
     }
     state.groups = [];
+
+    state.groupID = null;
+    state.slideID = null;
+    state.layerID = null;
 }
 
+export const updateStorageState = (state) => {
+    if(LocalStorage.getItem(KEY_TITLE) != null) state.dataInStorage = true;
+}
+
+//#region Title
 export const updateTitle = (state, title) => {
     state.title = title;
 }
 
+export const saveTitle = (state) => {
+    LocalStorage.set(KEY_TITLE, state.title);
+}
+
+export const loadTitle = (state) => {
+    state.title = LocalStorage.getItem(KEY_TITLE);
+}
+//#endregion
+
+//#region TTS Settings
 export const updateProjectLanguageCode = (state, languageCode) => {
     state.tts_settings.voice.languageCode = languageCode;
 }
@@ -33,11 +56,28 @@ export const updateTTSSettings = (state, tts_settings) => {
     state.tts_settings = tts_settings;
 }
 
+export const saveTTSSettings = (state) => {
+    LocalStorage.set(KEY_TTSSETTINGS, state.tts_settings);
+}
+
+export const loadTTSSettings = (state) => {
+    state.tts_settings = LocalStorage.getItem(KEY_TTSSETTINGS);
+}
+//#endregion
+
+//#region Group
 export const updateGroups = (state, groups) => {
     state.groups = groups;
 }
 
-// GROUP
+export const saveGroups = (state) => {
+    LocalStorage.set(KEY_GROUPS, state.groups);
+}
+
+export const loadGroups = (state) => {
+    state.groups = LocalStorage.getItem(KEY_GROUPS);
+}
+
 export const createGroup = (state) => {
     state.groups.push(
         {
@@ -55,6 +95,7 @@ export const deleteGroup = (state, groupID) => {
 export const updateGroupTitle = (state, {groupID, title}) => {
     state.groups[groupID].title = title;
 }
+//#endregion
 
 // SLIDE
 export const createSlide = (state, groupID) => {

@@ -17,6 +17,19 @@ export function LoadExampleProject (context) {
     context.commit('updateGroups', exampleProject.groups);
 }
 
+export function SaveToStorage (context) {
+    context.commit('saveTitle');
+    context.commit('saveTTSSettings');
+    context.commit('saveGroups');
+    context.commit('updateStorageState');
+}
+
+export function LoadFromStorage (context) {
+    context.commit('loadTitle');
+    context.commit('loadTTSSettings');
+    context.commit('loadGroups');
+}
+
 export function SetActiveElement (context, {groupID, slideID, layerID}) {
     context.commit('setGroupID', groupID);
     context.commit('setSlideID', slideID);
