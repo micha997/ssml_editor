@@ -11,14 +11,11 @@
             <q-input v-model="scope.value" dense autofocus @keyup.enter="scope.set" />
           </q-popup-edit>
         </q-toolbar-title>
-        <q-space ></q-space>
+        <q-space></q-space>
         <!--SSML Help Dialog-->
         <SSMLHelpDialog/>
-        <q-separator dark vertical/>
 
-        <q-btn flat dense round class="q-ml-sm"
-          icon="save" aria-label="Save"
-          @click="Save()"/>
+        <q-separator dark vertical/>
 
         <ImportExportDialog/>
 
@@ -50,14 +47,13 @@
 </template>
 
 <script>
-import { useQuasar } from 'quasar'
 import { defineComponent, computed } from 'vue'
 import { useStore } from 'vuex'
-import SSMLHelpDialog from '../components/SSMLHelpDialog.vue'
-import ImportExportDialog from '../components/ImportExportDialog.vue'
-import SettingsDialog from '../components/SettingsDialog.vue'
-import LeftDrawerContent from '../components/LeftDrawerContent.vue'
-import RightDrawerContent from '../components/RightDrawerContent.vue'
+import SSMLHelpDialog from '../components/navigation/SSMLHelpDialog.vue'
+import ImportExportDialog from '../components/navigation/FileDialog.vue'
+import SettingsDialog from '../components/navigation/SettingsDialog.vue'
+import LeftDrawerContent from '../components/navigation/LeftDrawerContent.vue'
+import RightDrawerContent from '../components/navigation/RightDrawerContent.vue'
 
 export default defineComponent({
   name: 'StoryLayout',
@@ -69,7 +65,6 @@ export default defineComponent({
     RightDrawerContent
   },
   setup() {
-    const quasar = useQuasar();
     const store = useStore();
 
     const leftDrawerState = computed({
@@ -88,21 +83,11 @@ export default defineComponent({
     });
 
     return {
-      quasar,
-      store,
       leftDrawerState,
       rightDrawerState,
       projectTitle
     }
   },
-  methods: {
-    Save(){
-      this.store.dispatch('project/SaveToStorage');
-      this.quasar.notify({
-        type: 'positive',
-        message: 'Your project has been saved to the browser storage.'
-      })
-    }
-  }
+  methods: {}
 })
 </script>

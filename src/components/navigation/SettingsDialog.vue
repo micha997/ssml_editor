@@ -30,23 +30,6 @@
           v-model="voiceName"
           :options="filteredVoiceOptions"
           label="Voice" />
-
-        <!--
-        <div class="text-caption" style="width: 400px;">
-          Speed: {{story.tts_settings.audioConfig.speakingRate}}
-        </div>
-        <q-slider
-          style="width: 100%;"
-          v-model="story.tts_settings.audioConfig.speakingRate"
-          :min="0.25" :max="4" :step="0.01"/>
-        <div class="text-caption" style="width: 100%;">
-          Pitch: {{story.tts_settings.audioConfig.pitch}}
-        </div>
-        <q-slider
-          style="width: 100%;"
-          v-model="story.tts_settings.audioConfig.pitch"
-          :min="-20" :max="20" :step="0.1"/>
-          -->
       </q-card-section>
     </q-card>
   </q-dialog>
@@ -55,8 +38,7 @@
 <script>
 import { defineComponent, computed } from 'vue'
 import { useStore } from 'vuex'
-import story from '../components/StoryPlaceholder.js'
-import tts_settings from '../components/TTSSettingsPlaceholder.js'
+import tts_settings from '../tts/DefaultSettings.js'
 
 export default defineComponent({
   name: 'SettingsDialog',
@@ -87,7 +69,6 @@ export default defineComponent({
   data(){
     return{
       visible: false,
-      story,
       tts_settings
     }
   },

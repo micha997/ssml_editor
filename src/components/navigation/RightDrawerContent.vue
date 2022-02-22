@@ -60,7 +60,6 @@
 <script>
 import { defineComponent, computed } from 'vue'
 import { useStore } from 'vuex'
-import story from '../components/StoryPlaceholder.js'
 
 export default defineComponent({
   name: 'RightDrawerContent',
@@ -79,7 +78,6 @@ export default defineComponent({
   },
   data() {
       return {
-        story,
         exportTTS: true,
         exportVTT: false,
       }

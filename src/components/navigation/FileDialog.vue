@@ -2,6 +2,25 @@
   <q-btn flat round dense class="q-mx-sm" icon="source">
     <q-menu>
       <q-list>
+
+        <q-item clickable v-close-popup @click="Save()">
+          <q-item-section side>
+            <q-icon name="save"/>
+          </q-item-section>
+          <q-item-section>
+            <q-item-label>Save Project</q-item-label>
+          </q-item-section>
+        </q-item>
+
+        <q-item v-if="$store.state.project.dataInStorage" clickable v-close-popup @click="Load()">
+          <q-item-section side>
+            <q-icon name="update"/>
+          </q-item-section>
+          <q-item-section>
+            <q-item-label>Reload Project</q-item-label>
+          </q-item-section>
+        </q-item>
+
         <q-item clickable v-close-popup @click="visible = true">
           <q-item-section side>
             <q-icon name="file_upload"/>
@@ -20,14 +39,6 @@
           </q-item-section>
         </q-item>
 
-        <q-item v-if="$store.state.project.dataInStorage" clickable v-close-popup @click="Load()">
-          <q-item-section side>
-            <q-icon name="update"/>
-          </q-item-section>
-          <q-item-section>
-            <q-item-label>Load Project</q-item-label>
-          </q-item-section>
-        </q-item>
       </q-list>
     </q-menu>
   </q-btn>
@@ -53,6 +64,7 @@
       </q-card-actions>
     </q-card>
   </q-dialog>
+
 </template>
 
 <script>
@@ -72,8 +84,16 @@ export default defineComponent({
     }
   },
   mounted(){
+    // Check for data in storage
     this.$store.commit('project/updateStorageState');
     if(this.$store.state.project.dataInStorage) this.$store.dispatch('project/LoadFromStorage');
+
+    // Setup save shortcut
+    document.addEventListener("keydown", this.SaveShortcut);
+  },
+  beforeUnmount(){
+    // Desetup save shortcut
+    document.removeEventListener("keydown", this.SaveShortcut);
   },
   methods: {
     Upload(){
@@ -89,6 +109,21 @@ export default defineComponent({
         'data:text/json;charset=utf-8,' + encodeURIComponent(this.$store.getters['project/getJsonData']),
         this.$store.state.project.title.replace(/ /g,"_") + ".json", "text/plain"
       );
+    },
+    SaveShortcut(e){
+      if(!(e.keyCode === 83 && (e.ctrlKey || e.metaKey))){
+        return;
+      }
+
+      e.preventDefault();
+      this.Save();
+    },
+    Save(){
+      this.$store.dispatch('project/SaveToStorage');
+      this.$q.notify({
+        type: 'positive',
+        message: 'Your project has been saved to the browser storage.'
+      })
     },
     Load(){
       this.$store.dispatch('project/LoadFromStorage');

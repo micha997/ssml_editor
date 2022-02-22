@@ -15,6 +15,12 @@
                         </q-popup-edit>
                     </div>
                 </q-item-section>
+                <q-item-section v-if="src" side>
+                    <audio controls ref="audioPreview">
+                        <source :src="src" type="audio/mp3">
+                        <p>Audio Element not supported</p>
+                    </audio>
+                </q-item-section>
                 <q-item-section side>
                     <div class="row q-gutter-x-sm q-pr-md">
                         <q-select
@@ -48,7 +54,7 @@
                                 </q-list>
                             </q-menu>
                         </q-btn>
-                        <q-btn flat dense round size="md" icon="volume_up" />
+                        <q-btn flat dense round size="md" icon="volume_up" @click="GetPreview()" />
                     </div>
                 </q-item-section>
             </q-item>
@@ -175,7 +181,8 @@
 <script>
 import { defineComponent, computed } from 'vue'
 import { useStore } from 'vuex'
-import tts_settings from '../components/TTSSettingsPlaceholder.js'
+import { buildBody, generateTTS } from './tts/SSMLClient.js'
+import tts_settings from './tts/DefaultSettings.js'
 
 export default defineComponent({
   name: 'SSMLEditor',
@@ -229,12 +236,25 @@ export default defineComponent({
                 ['language'],
                 ['phoneme'],
             ],
-            expanded: true
+            expanded: true,
+            src: null
       }
   },
   methods: {
     DeleteSelf(){
         this.store.commit('project/deleteEntry', this.$props.entryID);
+    },
+    GetPreview(){
+        let body = buildBody(this.input, { languageCode: this.tts_language_selection, name: this.tts_voice_selection});
+
+        generateTTS(body)
+            .then((audioData) => {
+                this.src = audioData.src;
+                this.$refs.audioPreview.load();
+            })
+            .catch((error) => {
+                console.log("Error getting audio");
+            });
     }
   },
   computed: {
