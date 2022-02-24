@@ -24,6 +24,18 @@ export const getEntryInput = (state) => (entryID) => {
     return element.entries[entryID].input;
 }
 
+export const getEntryLanguageCode = (state) => (entryID) => {
+    const element = getActiveElement(state);
+
+    return element.entries[entryID].tts_settings.voice.languageCode;
+}
+
+export const getEntryVoiceName = (state) => (entryID) => {
+    const element = getActiveElement(state);
+
+    return element.entries[entryID].tts_settings.voice.name;
+}
+
 export const getJsonData = (state) => {
     const toJson = {};
 

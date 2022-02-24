@@ -7,7 +7,7 @@ const tts_settings = {
         },
         {
             label: "English",
-            value: "us-US"
+            value: "en-US"
         },
         {
             label: "French",
@@ -33,15 +33,15 @@ const tts_settings = {
         // English Voices
         {
             label: "Dennis",
-            value: "us-US-Wavenet-D"
+            value: "en-US-Wavenet-D"
         },
         {
             label: "Erik",
-            value: "us-US-Wavenet-E"
+            value: "en-US-Wavenet-E"
         },
         {
             label: "Franziska",
-            value: "us-US-Wavenet-F"
+            value: "en-US-Wavenet-F"
         },
 
         // French Voices

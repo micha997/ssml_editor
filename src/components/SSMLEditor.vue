@@ -15,24 +15,18 @@
                         </q-popup-edit>
                     </div>
                 </q-item-section>
-                <q-item-section v-if="src" side>
-                    <audio controls ref="audioPreview">
-                        <source :src="src" type="audio/mp3">
-                        <p>Audio Element not supported</p>
-                    </audio>
-                </q-item-section>
                 <q-item-section side>
                     <div class="row q-gutter-x-sm q-pr-md">
                         <q-select
                             v-if="tts_settings.languageCodes"
                             filled dense style="width: 140px"
-                            v-model="tts_language_selection"
+                            v-model="languageCodeEntry"
                             :options="tts_settings.languageCodes"
                             label="Language" />
                         <q-select
                             v-if="tts_settings.voiceNames"
-                            filled dense style="width: 200px"
-                            v-model="tts_voice_selection"
+                            filled dense style="width: 140px"
+                            v-model="voiceNameEntry"
                             :options="filteredVoiceOptions"
                             label="Voice" />
                     </div>
@@ -40,6 +34,7 @@
                 <q-separator vertical/>
                 <q-item-section side>
                     <div>
+                        <q-btn flat dense round size="md" icon="volume_up" @click="GetPreview()"/>
                         <q-btn flat dense round size="md" icon="more_vert">
                             <q-menu>
                                 <q-list>
@@ -54,11 +49,17 @@
                                 </q-list>
                             </q-menu>
                         </q-btn>
-                        <q-btn flat dense round size="md" icon="volume_up" @click="GetPreview()" />
                     </div>
                 </q-item-section>
             </q-item>
         </q-card-section>
+        <q-card-section v-if="src" class="q-pt-none">
+            <audio controls ref="audioPreview" class="card-audio-preview" :title="title">
+                <source :src="src" type="audio/mp3">
+                <p>Audio Element not supported</p>
+            </audio>
+        </q-card-section>
+        <q-linear-progress indeterminate :class="{invisible: !isLoading}"/>
         <q-slide-transition>
             <div v-show="expanded">
                 <q-separator />
@@ -207,10 +208,22 @@ export default defineComponent({
           set: val => store.commit('project/updateEntryInput', {entryID: props.entryID, input: val})
       })
 
+      const languageCodeEntry = computed({
+          get: () => store.getters['project/getEntryLanguageCode'](props.entryID),
+          set: val => store.commit('project/updateEntryLanguageCode', {entryID: props.entryID, languageCode: val})
+      })
+
+      const voiceNameEntry = computed({
+          get: () => store.getters['project/getEntryVoiceName'](props.entryID),
+          set: val => store.commit('project/updateEntryVoiceName', {entryID: props.entryID, name: val})
+      })
+
       return {
           store,
           title,
-          input
+          input,
+          languageCodeEntry,
+          voiceNameEntry
       }
   },
   data() {
@@ -237,6 +250,7 @@ export default defineComponent({
                 ['phoneme'],
             ],
             expanded: true,
+            isLoading: false,
             src: null
       }
   },
@@ -245,24 +259,34 @@ export default defineComponent({
         this.store.commit('project/deleteEntry', this.$props.entryID);
     },
     GetPreview(){
-        let body = buildBody(this.input, { languageCode: this.tts_language_selection, name: this.tts_voice_selection});
+        this.isLoading = true;
+
+        let body = buildBody(this.input, { languageCode: this.languageCodeEntry, name: this.voiceNameEntry});
 
         generateTTS(body)
             .then((audioData) => {
                 this.src = audioData.src;
                 this.$refs.audioPreview.load();
+                this.isLoading = false;
             })
             .catch((error) => {
                 console.log("Error getting audio");
+                this.isLoading = false;
             });
     }
   },
   computed: {
     filteredVoiceOptions() {
       return tts_settings.voiceNames.filter(item => {
-        return item.value.includes(this.tts_language_selection.value);
+        return item.value.includes(this.languageCodeEntry.value);
       })
     }
   }
 })
 </script>
+<style lang="scss">
+.card-audio-preview {
+    width: 100%;
+    height: 40px;
+}
+</style>

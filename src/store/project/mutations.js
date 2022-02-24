@@ -158,6 +158,18 @@ export const createEntry = (state) => {
             uid: uid(),
             title: 'Enter Title',
             ssml: true,
+            tts_settings: {
+                voice: {
+                    languageCode: {
+                        label: "German",
+                        value: "de-DE"
+                    },
+                    name: {
+                        label: "Franziska",
+                        value: "de-DE-Wavenet-F"
+                    }
+                }
+            },
             input: 'Enter Text'
         }
     );
@@ -179,6 +191,18 @@ export const updateEntryInput = (state, {entryID, input}) => {
     const element = getActiveElement(state);
 
     element.entries[entryID].input = input;
+}
+
+export const updateEntryLanguageCode = (state, {entryID, languageCode}) => {
+    const element = getActiveElement(state);
+
+    element.entries[entryID].tts_settings.voice.languageCode = languageCode;
+}
+
+export const updateEntryVoiceName = (state, {entryID, name}) => {
+    const element = getActiveElement(state);
+
+    element.entries[entryID].tts_settings.voice.name = name;
 }
 
 // SET EXPORT

@@ -19,12 +19,36 @@
 									"uid": "aa06a7e9-b4ec-4acd-bd52-8192de13ab2c",
 									"title": "Webmodus TTS 1",
 									"ssml": true,
+									"tts_settings": {
+										"voice": {
+											"languageCode": {
+												"label": "German",
+												"value": "de-DE"
+											},
+											"name": {
+												"label": "Franziska",
+												"value": "de-DE-Wavenet-F"
+											}
+										}
+									},
 									"input": "At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet."
 								},
 								{
 									"uid": "3b49e4b0-56ce-48e2-a938-4f3cac2bd42b",
 									"title": "Webmodus TTS 2",
 									"ssml": true,
+									"tts_settings": {
+										"voice": {
+											"languageCode": {
+												"label": "German",
+												"value": "de-DE"
+											},
+											"name": {
+												"label": "Franziska",
+												"value": "de-DE-Wavenet-F"
+											}
+										}
+									},
 									"input": "Enter Text"
 								}
 							],
@@ -39,12 +63,36 @@
 									"uid": "8c954f3e-ec5b-4054-8d1e-25f7b48aa31f",
 									"title": "Sprachassistent TTS 1",
 									"ssml": true,
+									"tts_settings": {
+										"voice": {
+											"languageCode": {
+												"label": "German",
+												"value": "de-DE"
+											},
+											"name": {
+												"label": "Franziska",
+												"value": "de-DE-Wavenet-F"
+											}
+										}
+									},
 									"input": "Enter Text"
 								},
 								{
 									"uid": "62ffdcd9-abd7-45e1-aa2d-a4969ec63686",
 									"title": "Sprachassistent TTS 2",
 									"ssml": true,
+									"tts_settings": {
+										"voice": {
+											"languageCode": {
+												"label": "German",
+												"value": "de-DE"
+											},
+											"name": {
+												"label": "Franziska",
+												"value": "de-DE-Wavenet-F"
+											}
+										}
+									},
 									"input": "At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet."
 								}
 							],
@@ -56,12 +104,36 @@
 							"uid": "3d1bc535-2e79-415f-b4f8-32d2b61e8735",
 							"title": "Einleitung",
 							"ssml": true,
+							"tts_settings": {
+								"voice": {
+									"languageCode": {
+										"label": "German",
+										"value": "de-DE"
+									},
+									"name": {
+										"label": "Franziska",
+										"value": "de-DE-Wavenet-F"
+									}
+								}
+							},
 							"input": "Willkommen"
 						},
 						{
 							"uid": "774bc23e-9eee-496d-829a-c423833adc59",
 							"title": "Erlaeuterung",
 							"ssml": true,
+							"tts_settings": {
+								"voice": {
+									"languageCode": {
+										"label": "German",
+										"value": "de-DE"
+									},
+									"name": {
+										"label": "Franziska",
+										"value": "de-DE-Wavenet-F"
+									}
+								}
+							},
 							"input": "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua."
 						}
 					],
@@ -77,6 +149,18 @@
 							"uid": "0d608a5f-1540-49f4-8de5-53300e20976b",
 							"title": "Willkommen",
 							"ssml": true,
+							"tts_settings": {
+								"voice": {
+									"languageCode": {
+										"label": "German",
+										"value": "de-DE"
+									},
+									"name": {
+										"label": "Franziska",
+										"value": "de-DE-Wavenet-F"
+									}
+								}
+							},
 							"input": "Hello there"
 						}
 					],
@@ -152,6 +236,18 @@
 							"uid": "46973417-afa5-456c-8cd9-d2f4a302236a",
 							"title": "5D TTS 1",
 							"ssml": true,
+							"tts_settings": {
+								"voice": {
+									"languageCode": {
+										"label": "German",
+										"value": "de-DE"
+									},
+									"name": {
+										"label": "Franziska",
+										"value": "de-DE-Wavenet-F"
+									}
+								}
+							},
 							"input": "Enter Text"
 						}
 					],
@@ -167,6 +263,18 @@
 							"uid": "9cf2a962-12e5-42c0-be0e-e5a51dbd0cda",
 							"title": "5D1 TTS 1",
 							"ssml": true,
+							"tts_settings": {
+								"voice": {
+									"languageCode": {
+										"label": "German",
+										"value": "de-DE"
+									},
+									"name": {
+										"label": "Franziska",
+										"value": "de-DE-Wavenet-F"
+									}
+								}
+							},
 							"input": "Enter Text"
 						}
 					],
@@ -182,12 +290,36 @@
 							"uid": "e445d6df-fc7b-426e-a184-4e596edeeece",
 							"title": "5D2 TTS 1",
 							"ssml": true,
+							"tts_settings": {
+								"voice": {
+									"languageCode": {
+										"label": "German",
+										"value": "de-DE"
+									},
+									"name": {
+										"label": "Franziska",
+										"value": "de-DE-Wavenet-F"
+									}
+								}
+							},
 							"input": "Enter Text"
 						},
 						{
 							"uid": "26f71d96-a8a7-495f-a285-abfea040c9d4",
 							"title": "5D1 TTS 2",
 							"ssml": true,
+							"tts_settings": {
+								"voice": {
+									"languageCode": {
+										"label": "German",
+										"value": "de-DE"
+									},
+									"name": {
+										"label": "Franziska",
+										"value": "de-DE-Wavenet-F"
+									}
+								}
+							},
 							"input": "Enter Text"
 						}
 					],
@@ -203,6 +335,18 @@
 							"uid": "3bec4564-942c-46ee-b433-7ebefc1db9ab",
 							"title": "5D3 TTS 1",
 							"ssml": true,
+							"tts_settings": {
+								"voice": {
+									"languageCode": {
+										"label": "German",
+										"value": "de-DE"
+									},
+									"name": {
+										"label": "Franziska",
+										"value": "de-DE-Wavenet-F"
+									}
+								}
+							},
 							"input": "Enter Text"
 						}
 					],
@@ -218,18 +362,54 @@
 							"uid": "7eceab30-523d-4c27-a585-773b59929680",
 							"title": "5D4 TTS 1",
 							"ssml": true,
+							"tts_settings": {
+								"voice": {
+									"languageCode": {
+										"label": "German",
+										"value": "de-DE"
+									},
+									"name": {
+										"label": "Franziska",
+										"value": "de-DE-Wavenet-F"
+									}
+								}
+							},
 							"input": "Enter Text"
 						},
 						{
 							"uid": "d9588bfb-5f14-4775-ad83-2e475dc8f095",
 							"title": "5D4 TTS 2",
 							"ssml": true,
+							"tts_settings": {
+								"voice": {
+									"languageCode": {
+										"label": "German",
+										"value": "de-DE"
+									},
+									"name": {
+										"label": "Franziska",
+										"value": "de-DE-Wavenet-F"
+									}
+								}
+							},
 							"input": "Enter Text"
 						},
 						{
 							"uid": "d5c7f1a0-3871-4fc8-aa22-fa91964b639a",
 							"title": "5D4 TTS 3",
 							"ssml": true,
+							"tts_settings": {
+								"voice": {
+									"languageCode": {
+										"label": "German",
+										"value": "de-DE"
+									},
+									"name": {
+										"label": "Franziska",
+										"value": "de-DE-Wavenet-F"
+									}
+								}
+							},
 							"input": "Enter Text"
 						}
 					],
