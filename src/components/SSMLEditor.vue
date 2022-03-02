@@ -53,13 +53,16 @@
                 </q-item-section>
             </q-item>
         </q-card-section>
-        <q-card-section v-if="src" class="q-pt-none">
+        <!--Audio Preview Start-->
+        <q-card-section v-show="src" class="q-pt-none">
             <audio controls ref="audioPreview" class="card-audio-preview" :title="title">
                 <source :src="src" type="audio/mp3">
                 <p>Audio Element not supported</p>
             </audio>
         </q-card-section>
-        <q-linear-progress indeterminate :class="{invisible: !isLoading}"/>
+        <q-linear-progress v-if="!isError" indeterminate :class="{invisible: !isLoading}"/>
+        <q-linear-progress v-else value="1.0" color="negative"/>
+        <!--Audio Preview End-->
         <q-slide-transition>
             <div v-show="expanded">
                 <q-separator />
@@ -82,13 +85,13 @@
                                 label="Break"
                                 dropdown-icon="pause">
                                 <q-list>
-                                    <q-item clickable>
+                                    <q-item clickable @click="addBreak(200)">
                                         <q-item-section>200ms</q-item-section>
                                     </q-item>
-                                    <q-item clickable>
+                                    <q-item clickable @click="addBreak(400)">
                                         <q-item-section>400ms</q-item-section>
                                     </q-item>
-                                    <q-item clickable>
+                                    <q-item clickable @click="addBreak(1000)">
                                         <q-item-section>1000ms</q-item-section>
                                     </q-item>
                                 </q-list>
@@ -96,7 +99,7 @@
                         </template>
                         <template v-slot:sayas>
                             <q-btn-dropdown
-                                unelevated dense no-caps
+                                unelevated dense no-caps disable
                                 menu-anchor="top right" menu-self="top left"
                                 text-color="primary" size="sm"
                                 no-icon-animation
@@ -105,7 +108,7 @@
                         </template>
                         <template v-slot:sub>
                             <q-btn-dropdown
-                                unelevated dense no-caps
+                                unelevated dense no-caps disable
                                 menu-anchor="top right" menu-self="top left"
                                 text-color="primary" size="sm"
                                 no-icon-animation
@@ -114,7 +117,7 @@
                         </template>
                         <template v-slot:prosody>
                             <q-btn-dropdown
-                                unelevated dense no-caps
+                                unelevated dense no-caps disable
                                 menu-anchor="top right" menu-self="top left"
                                 text-color="primary" size="sm"
                                 no-icon-animation
@@ -123,7 +126,7 @@
                         </template>
                         <template v-slot:emphasis>
                             <q-btn-dropdown
-                                unelevated dense no-caps
+                                unelevated dense no-caps disable
                                 menu-anchor="top right" menu-self="top left"
                                 text-color="primary" size="sm"
                                 no-icon-animation
@@ -132,7 +135,7 @@
                         </template>
                         <template v-slot:voice>
                             <q-btn-dropdown
-                                unelevated dense no-caps
+                                unelevated dense no-caps disable
                                 menu-anchor="top right" menu-self="top left"
                                 text-color="primary" size="sm"
                                 no-icon-animation
@@ -141,7 +144,7 @@
                         </template>
                         <template v-slot:language>
                             <q-btn-dropdown
-                                unelevated dense no-caps
+                                unelevated dense no-caps disable
                                 menu-anchor="top right" menu-self="top left"
                                 text-color="primary" size="sm"
                                 no-icon-animation
@@ -165,7 +168,7 @@
                         </template>
                         <template v-slot:phoneme>
                             <q-btn-dropdown
-                                unelevated dense no-caps
+                                unelevated dense no-caps disable
                                 menu-anchor="top right" menu-self="top left"
                                 text-color="primary" size="sm"
                                 no-icon-animation
@@ -180,6 +183,7 @@
 </template>
 
 <script>
+import { useQuasar } from 'quasar'
 import { defineComponent, computed } from 'vue'
 import { useStore } from 'vuex'
 import { buildBody, generateTTS } from './tts/SSMLClient.js'
@@ -251,7 +255,9 @@ export default defineComponent({
             ],
             expanded: true,
             isLoading: false,
-            src: null
+            isError: false,
+            src: null,
+            $q: useQuasar(),
       }
   },
   methods: {
@@ -259,6 +265,7 @@ export default defineComponent({
         this.store.commit('project/deleteEntry', this.$props.entryID);
     },
     GetPreview(){
+        this.isError = false;
         this.isLoading = true;
 
         let body = buildBody(this.input, { languageCode: this.languageCodeEntry, name: this.voiceNameEntry});
@@ -266,13 +273,29 @@ export default defineComponent({
         generateTTS(body)
             .then((audioData) => {
                 this.src = audioData.src;
-                this.$refs.audioPreview.load();
                 this.isLoading = false;
+                this.$refs.audioPreview.load();
+                this.$q.notify({
+                    type: 'positive',
+                    message: 'Successfully loaded audio preview.'
+                });
             })
             .catch((error) => {
-                console.log("Error getting audio");
+                console.log("Error getting audio: ", error);
                 this.isLoading = false;
+                this.isError = true;
+                this.$q.notify({
+                    type: 'negative',
+                    message: 'Error loading audio preview.'
+                });
             });
+    },
+    addBreak(amount){
+        const edit = this.$refs.editorRef;
+        edit.caret.restore();
+        edit.runCmd('insertHTML', ` <break time="` + amount + `ms"> </break>`);
+        edit.focus();
+        this.input = this.input.replaceAll("&nbsp;", " ");
     }
   },
   computed: {

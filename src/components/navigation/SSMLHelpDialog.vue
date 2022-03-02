@@ -30,19 +30,19 @@
         <div v-show="break_visible">
             <q-card-section class="bg-grey-2">
               <code>
-                Step 1, take a deep breath. <span>&lt;break time="2000ms"/&gt;</span> Step 2, exhale.
+                Hallo, <span>&lt;break time="2000ms"/&gt;</span> wie gehts?.
               </code>
             </q-card-section>
             <q-card-section>
               <div class="text-caption text-center">Without SSML</div>
               <audio controls style="width: 100%">
-                <source :src="break_pre.src" type="audio/mp3">
+                <source :src="break_before.src" type="audio/mp3">
                 <p>Audio Element not supported</p>
               </audio>
 
               <div class="text-caption text-center">With SSML</div>
               <audio controls style="width: 100%">
-                <source :src="break_pre.src" type="audio/mp3">
+                <source :src="break_after.src" type="audio/mp3">
                 <p>Audio Element not supported</p>
               </audio>
             </q-card-section>
@@ -241,9 +241,14 @@ export default defineComponent({
       language_visible: false,
       phoneme_visible: false,
 
-      break_pre:
+      break_before:
       {
-        src: 'https://raw.githubusercontent.com/quasarframework/quasar-ui-qmediaplayer/dev/demo/public/media/Scott_Holmes_-_04_-_Upbeat_Party.mp3',
+        src: require('../../assets/ssmlguidecontent/Break_Before.mp3'),
+        type: 'audio/mp3'
+      },
+      break_after:
+      {
+        src: require('../../assets/ssmlguidecontent/Break_After.mp3'),
         type: 'audio/mp3'
       }
     }

@@ -1,15 +1,17 @@
 // app global css in SCSS form
-ssml-editor {
+.ssml-editor {
     say-as {
-        color: red;
+        &:before {
+
+        }
     }
 
     break {
-        &:before{
+        &:before {
             content: "Break " attr(time);
             color: white;
             padding: 2px 8px 2px 8px;
-            background-color: cornflowerblue;
+            background-color: $primary;
             border-radius: 4px;
         }
     }
