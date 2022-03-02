@@ -9,16 +9,9 @@ const routes = [
   },
   {
     path: '/project',
-    component: () => import('layouts/StoryLayout.vue'),
+    component: () => import('src/layouts/ProjectLayout.vue'),
     children: [
       { path: '', component: () => import('pages/AdvancedEditor.vue') }
-    ]
-  },
-  {
-    path: '/old',
-    component: () => import('layouts/BlankLayout.vue'),
-    children: [
-      { path: '', component: () => import('pages/Editor.vue') },
     ]
   },
 

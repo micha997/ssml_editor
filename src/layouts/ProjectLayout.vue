@@ -56,7 +56,7 @@ import LeftDrawerContent from '../components/navigation/LeftDrawerContent.vue'
 import RightDrawerContent from '../components/navigation/RightDrawerContent.vue'
 
 export default defineComponent({
-  name: 'StoryLayout',
+  name: 'ProjectLayout',
   components: {
     SSMLHelpDialog,
     ImportExportDialog,
