@@ -6,6 +6,7 @@ export function getVoices(){
 
 export function generateTTS(body){
     return new Promise( (resolve, reject) => {
+        // Set SSML Server URL
         const url = 'http://localhost:4000/tts';
 
         const config = {
