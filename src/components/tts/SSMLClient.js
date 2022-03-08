@@ -4,7 +4,7 @@ export function getVoices(){
 
 }
 
-export function generateTTS(body){
+export function generateTTS(body, prefix = true){
     return new Promise( (resolve, reject) => {
         // Set SSML Server URL
         const url = 'http://localhost:4000/tts';
@@ -15,9 +15,17 @@ export function generateTTS(body){
 
         axios.post(url, body, config)
             .then((response) => {
-                let audioData = {
-                    //text: body.input.replace(/<\/?[^>]+(>|$)/g, ""),
-                    src: "data:audio/mpeg;base64," + response.data
+                let audioData;
+                if (prefix){
+                    audioData = {
+                        //text: body.input.replace(/<\/?[^>]+(>|$)/g, ""),
+                        src: "data:audio/mpeg;base64," + response.data
+                    }
+                }else{
+                    audioData = {
+                        //text: body.input.replace(/<\/?[^>]+(>|$)/g, ""),
+                        src: response.data
+                    }
                 }
 
                 resolve(audioData);

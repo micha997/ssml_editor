@@ -265,15 +265,14 @@ export default defineComponent({
         this.store.commit('project/deleteEntry', this.$props.entryID);
     },
     GetPreview(){
-        this.isError = false;
-        this.isLoading = true;
+        this.startLoadingIndicator();
 
         let body = buildBody(this.input, { languageCode: this.languageCodeEntry, name: this.voiceNameEntry});
-
+        
         generateTTS(body)
             .then((audioData) => {
                 this.src = audioData.src;
-                this.isLoading = false;
+                this.stopLoadingIndicator();
                 this.$refs.audioPreview.load();
                 this.$q.notify({
                     type: 'positive',
@@ -281,9 +280,8 @@ export default defineComponent({
                 });
             })
             .catch((error) => {
-                console.log("Error getting audio: ", error);
-                this.isLoading = false;
-                this.isError = true;
+                this.showErrorIndicator();
+
                 this.$q.notify({
                     type: 'negative',
                     message: 'Error loading audio preview.'
@@ -296,6 +294,18 @@ export default defineComponent({
         edit.runCmd('insertHTML', ` <break time="` + amount + `ms"> </break>`);
         edit.focus();
         this.input = this.input.replaceAll("&nbsp;", " ");
+    },
+    startLoadingIndicator(){
+        this.isLoading = true;
+        this.isError = false;
+    },
+    stopLoadingIndicator(){
+        this.isLoading = false;
+        this.isError = false;
+    },
+    showErrorIndicator(){
+        this.isLoading = false;
+        this.isError = true;
     }
   },
   computed: {
