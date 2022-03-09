@@ -1,25 +1,25 @@
-# SSML-Editor (ssml_editor_quasar)
+# SSML-Editor
 
-SSML Editor for TTS
+SSML Editor built with Quasar.
 
 ## Install the dependencies
 ```bash
-yarn
+npm install
 ```
 
 ### Start the app in development mode (hot-code reloading, error reporting, etc.)
 ```bash
-quasar dev
+npm run dev
 ```
 
 ### Lint the files
 ```bash
-yarn run lint
+npm run lint
 ```
 
 ### Build the app for production
 ```bash
-quasar build
+npm run build
 ```
 
 ### Customize the configuration
