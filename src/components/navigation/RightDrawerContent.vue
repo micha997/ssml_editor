@@ -253,7 +253,7 @@ export default defineComponent({
                 vtt.add(
                     duration_blocks * i,            // Start time
                     duration_blocks * (i + 1),      // End time
-                    text.substring(SPLIT_LENGTH * 0, SPLIT_LENGTH * (i + 1)) // Substring
+                    text.substring(SPLIT_LENGTH * i, SPLIT_LENGTH * (i + 1)) // Substring
                 );
             }
 

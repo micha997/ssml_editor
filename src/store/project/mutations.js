@@ -14,7 +14,7 @@ export const clearProject = (state) => {
                 value: "de-DE"
             },
             name: {
-                label: "Franziska",
+                label: "Alexa",
                 value: "de-DE-Wavenet-F"
             },
         },
@@ -165,7 +165,7 @@ export const createEntry = (state) => {
                         value: "de-DE"
                     },
                     name: {
-                        label: "Franziska",
+                        label: "Alexa",
                         value: "de-DE-Wavenet-F"
                     }
                 }

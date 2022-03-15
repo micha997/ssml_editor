@@ -21,6 +21,8 @@
     "jszip": "^3.7.1",
     "quasar": "^2.0.0",
     "vtt-creator": "^1.1.1",
+    "vue": "^3.2.31",
+    "vue-router": "^4.0.14",
     "vuex": "^4.0.2"
   },
   "devDependencies": {

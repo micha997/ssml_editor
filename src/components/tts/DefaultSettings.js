@@ -18,16 +18,20 @@ const tts_settings = {
     [
         // German Voices
         {
-            label: "Dennis",
+            label: "Erik",
             value: "de-DE-Wavenet-D"
         },
         {
-            label: "Erik",
+            label: "Hans",
             value: "de-DE-Wavenet-E"
         },
         {
-            label: "Franziska",
+            label: "Alexa",
             value: "de-DE-Wavenet-F"
+        },
+        {
+            label: "Marlene",
+            value: "de-DE-Wavenet-C"
         },
 
         // English Voices
